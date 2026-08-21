@@ -20,6 +20,7 @@ class Produto
             p.nome,
             p.marca,
             p.descricao,
+            p.estoque,
             p.ativo,
             c.nome AS categoria_nome
         FROM produto p
@@ -56,7 +57,8 @@ class Produto
         int $categoriaId,
         string $nome,
         string $marca,
-        ?string $descricao
+        ?string $descricao,
+        int $estoque = 0
     ): int
     {
         $stmt = $this->conn->prepare("
@@ -66,6 +68,7 @@ class Produto
                 nome,
                 marca,
                 descricao,
+                estoque,
                 ativo
             )
             VALUES
@@ -74,6 +77,7 @@ class Produto
                 :nome,
                 :marca,
                 :descricao,
+                :estoque,
                 1
             )
         ");
@@ -82,7 +86,8 @@ class Produto
             ':categoria_id' => $categoriaId,
             ':nome' => $nome,
             ':marca' => $marca,
-            ':descricao' => $descricao
+            ':descricao' => $descricao,
+            ':estoque' => max(0, $estoque)
         ]);
 
         return (int)$this->conn->lastInsertId();
@@ -93,7 +98,8 @@ class Produto
         int $categoriaId,
         string $nome,
         string $marca,
-        ?string $descricao
+        ?string $descricao,
+        int $estoque = 0
     ): void
     {
         $stmt = $this->conn->prepare("
@@ -102,7 +108,8 @@ class Produto
                 categoria_id = :categoria_id,
                 nome = :nome,
                 marca = :marca,
-                descricao = :descricao
+                descricao = :descricao,
+                estoque = :estoque
             WHERE id = :id
         ");
 
@@ -111,7 +118,8 @@ class Produto
             ':categoria_id' => $categoriaId,
             ':nome' => $nome,
             ':marca' => $marca,
-            ':descricao' => $descricao
+            ':descricao' => $descricao,
+            ':estoque' => max(0, $estoque)
         ]);
     }
 
