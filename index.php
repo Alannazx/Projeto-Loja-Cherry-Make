@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once __DIR__ . '/config/db.php';
 Database::getConnection();
 
@@ -11,6 +12,7 @@ $action = $_GET['action'] ?? 'form';
 
 // Carregar controller
 switch ($controller) {
+
     case 'auth':
         require_once __DIR__ . '/controllers/AuthController.php';
         $c = new AuthController();
@@ -42,10 +44,17 @@ switch ($controller) {
         break;
 
 
-    // CRUD USUÁRIO / VENDEDOR!!!!!!!!
+    // CRUD USUÁRIO / VENDEDOR
     case 'usuario':
         require_once __DIR__ . '/controllers/UsuarioController.php';
         $c = new UsuarioController();
+        break;
+
+
+    // SITE OFICIAL
+    case 'site':
+        require_once __DIR__ . '/controllers/SiteController.php';
+        $c = new SiteController();
         break;
 
 
@@ -54,6 +63,7 @@ switch ($controller) {
         die("Controller inválido.");
 }
 
+
 // Executar ação
 if (!method_exists($c, $action)) {
     die("Ação inválida.");
@@ -61,3 +71,4 @@ if (!method_exists($c, $action)) {
 
 
 $c->$action();
+?>
