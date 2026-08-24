@@ -10,11 +10,16 @@ $perfil = $_SESSION['perfil'] ?? 'vendedor';
 
 <meta charset="utf-8">
 
-<link rel="icon" href="/lojacosmeticos_alalet/public/assets/img/favicon.png">
+<link rel="icon" href="/lojacosmeticos_alalet/public/assets/img/cherry.png">
 
 <title>Dashboard - Cherry Make</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Poppins:wght@300;400;500;600;700&family=Allura&display=swap" rel="stylesheet">
 
 <style>
 
@@ -28,87 +33,96 @@ $perfil = $_SESSION['perfil'] ?? 'vendedor';
     box-sizing:border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Poppins:wght@300;400;500;600;700&display=swap');
-
 :root{
-    --vinho:#8B001F;
-    --vinho-escuro:#690016;
-    --rosa:#FFC1D6;
-    --rosa-claro:#FFF5F8;
-    --rosa-medio:#F58AAA;
-    --branco:#FFFFFF;
-    --texto:#5B1B2A;
-    --muted:#806F75;
-    --borda:#F4CBD7;
+
+    --vinho:#99001f;
+    --vinho-escuro:#7b0019;
+
+    --rosa:#ef7898;
+    --rosa-claro:#fff7f9;
+    --rosa-medio:#f5a4b8;
+    --rosa-forte:#e85d83;
+
+    --branco:#ffffff;
+
+    --texto:#65182a;
+    --texto-claro:#8b4c5b;
+
+    --borda:#f2b7c7;
+
+    --fundo:#fff9fb;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
 
     min-height:100vh;
 
-    font-family:"Poppins", Arial, Helvetica, sans-serif;
+    font-family:"Poppins", Arial, sans-serif;
 
     color:var(--texto);
 
     background:
-
-        radial-gradient(
-            circle at 3% 15%,
-            var(--rosa) 0px,
-            var(--rosa) 7px,
-            transparent 8px
-        ),
-
-        radial-gradient(
-            circle at 97% 25%,
-            var(--vinho) 0px,
-            var(--vinho) 7px,
-            transparent 8px
-        ),
-
-        radial-gradient(
-            circle at 5% 75%,
-            var(--vinho) 0px,
-            var(--vinho) 6px,
+        radial-gradient(circle at 84% 17%,
+            #ef7898 0px,
+            #ef7898 6px,
             transparent 7px
         ),
 
-        radial-gradient(
-            circle at 95% 85%,
-            var(--rosa) 0px,
-            var(--rosa) 8px,
-            transparent 9px
+        radial-gradient(circle at 89% 22%,
+            #f5a4b8 0px,
+            #f5a4b8 6px,
+            transparent 7px
+        ),
+
+        radial-gradient(circle at 94% 16%,
+            #99001f 0px,
+            #99001f 6px,
+            transparent 7px
+        ),
+
+        radial-gradient(circle at 91% 27%,
+            #f5a4b8 0px,
+            #f5a4b8 5px,
+            transparent 6px
         ),
 
         linear-gradient(
             135deg,
-            #FFF8FA,
-            #FFDCE7
+            #fffafb,
+            #fff1f5
         );
 
-    padding:35px;
+    padding:0;
 }
 
 
 /* =========================================================
-   CONTAINER
+   CONTAINER PRINCIPAL
 ========================================================= */
 
 .container{
 
     width:100%;
 
-    max-width:1350px;
+    max-width:1535px;
 
-    margin:auto;
+    min-height:100vh;
 
-    background:var(--branco);
+    margin:0 auto;
 
-    border-radius:35px;
+    background:rgba(255,255,255,.75);
+
+    border:1px solid #e7a6b8;
+
+    border-radius:0 0 18px 18px;
 
     overflow:hidden;
 
-    box-shadow:0 20px 50px rgba(139,0,31,.15);
+    box-shadow:0 10px 35px rgba(139,0,31,.08);
 }
 
 
@@ -118,16 +132,9 @@ body{
 
 .topbar{
 
-    min-height:135px;
+    min-height:140px;
 
-    padding:25px 45px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--vinho),
-            var(--vinho-escuro)
-        );
+    padding:30px 70px;
 
     display:flex;
 
@@ -135,7 +142,9 @@ body{
 
     align-items:center;
 
-    color:white;
+    background:rgba(255,255,255,.88);
+
+    border-bottom:1px solid rgba(242,183,199,.25);
 }
 
 
@@ -149,31 +158,23 @@ body{
 
     align-items:center;
 
-    gap:18px;
+    gap:17px;
 }
-
 
 .cherry-logo{
 
-    width:75px;
+    width:78px;
 
-    height:75px;
-
-    border-radius:50%;
-
-    background:rgba(255,193,214,.18);
-
-    border:1px solid rgba(255,255,255,.25);
+    height:78px;
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
     overflow:hidden;
 }
-
 
 .cherry-logo img{
 
@@ -182,34 +183,91 @@ body{
     height:100%;
 
     object-fit:contain;
-
-    padding:7px;
 }
-
 
 .brand h1{
 
     font-family:"Bodoni Moda", Georgia, serif;
 
-    font-size:38px;
+    font-size:42px;
 
     font-weight:600;
 
-    letter-spacing:-1px;
+    line-height:1;
 
-    margin-bottom:2px;
+    color:var(--vinho);
+
+    letter-spacing:-1px;
 }
 
+.brand h1 span{
+
+    font-family:"Allura", cursive;
+
+    color:var(--rosa-forte);
+
+    font-size:42px;
+
+    font-weight:400;
+
+    margin-left:5px;
+}
 
 .brand small{
 
-    font-size:11px;
+    display:block;
+
+    margin-top:8px;
+
+    font-size:9px;
 
     letter-spacing:4px;
 
-    color:var(--rosa);
+    color:var(--vinho);
 
     text-transform:uppercase;
+}
+
+
+/* =========================================================
+   CENTRO DO TOPO
+========================================================= */
+
+.dashboard-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-left:80px;
+}
+
+.dashboard-title span{
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:19px;
+
+    color:var(--vinho);
+
+    position:relative;
+}
+
+.dashboard-title span::after{
+
+    content:"";
+
+    display:block;
+
+    width:110px;
+
+    border-bottom:2px dotted var(--rosa);
+
+    margin:7px auto 0;
 }
 
 
@@ -217,50 +275,168 @@ body{
    USUÁRIO
 ========================================================= */
 
-.pill{
+.top-actions{
 
-    background:rgba(255,255,255,.13);
+    display:flex;
 
-    border:1px solid rgba(255,255,255,.12);
+    align-items:center;
 
-    padding:15px 23px;
+    gap:18px;
+}
 
-    border-radius:30px;
+.notification{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:50%;
+
+    background:#fff0f4;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:26px;
+
+    color:var(--vinho);
+
+    position:relative;
+}
+
+.notification .number{
+
+    position:absolute;
+
+    top:-3px;
+
+    right:-2px;
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    background:var(--vinho);
+
+    color:white;
+
+    font-size:11px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:bold;
+}
+
+.vertical-line{
+
+    height:58px;
+
+    width:1px;
+
+    background:#efc2cf;
+}
+
+.user-pill{
+
+    min-width:235px;
+
+    padding:12px 18px;
+
+    border-radius:35px;
+
+    background:#fff0f4;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:var(--vinho);
+}
+
+.user-icon{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.user-icon img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+}
+
+.user-info{
+
+    flex:1;
+}
+
+.user-info small{
+
+    display:block;
+
+    color:var(--rosa-forte);
 
     font-size:13px;
 
-    white-space:nowrap;
+    margin-bottom:1px;
 }
 
+.user-info strong{
 
-.pill a{
+    font-size:14px;
 
-    text-decoration:none;
+    font-weight:500;
 
-    color:var(--rosa);
-
-    font-weight:bold;
-
-    margin-left:7px;
+    color:var(--vinho);
 }
 
+.user-arrow{
 
-.pill a:hover{
-    color:white;
+    font-size:20px;
+
+    color:var(--vinho);
 }
 
 
 /* =========================================================
-   ÁREA PRINCIPAL
+   CONTEÚDO
 ========================================================= */
 
 .card{
 
-    background:#FFF9FB;
+    padding:30px 70px 40px;
 
-    padding:45px 70px 50px;
-
-    min-height:600px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.65),
+            rgba(255,246,249,.8)
+        );
 }
 
 
@@ -274,354 +450,687 @@ body{
 
     justify-content:space-between;
 
-    align-items:center;
+    align-items:flex-end;
 
-    margin-bottom:35px;
+    margin-bottom:27px;
 }
 
+.welcome-text h3{
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:18px;
+
+    font-weight:400;
+
+    color:var(--vinho);
+
+    margin-bottom:1px;
+}
 
 .welcome-text h2{
 
     font-family:"Bodoni Moda", Georgia, serif;
 
-    font-size:48px;
+    font-size:56px;
 
-    line-height:1.1;
+    line-height:1;
 
     color:var(--vinho);
 
-    margin-bottom:10px;
+    margin-bottom:12px;
+
+    font-weight:600;
 }
 
+.welcome-text h2::after{
 
-.welcome-text h2 span{
-    color:var(--rosa-medio);
+    content:"♡";
+
+    color:var(--rosa-forte);
+
+    font-size:25px;
+
+    margin-left:5px;
 }
-
 
 .welcome-text p{
 
-    font-size:15px;
+    font-size:14px;
 
-    color:var(--muted);
+    color:var(--vinho);
 
-    margin-bottom:20px;
+    font-weight:400;
+}
+
+.welcome-text p::after{
+
+    content:" ✦";
+
+    color:var(--rosa-forte);
+
+    font-size:18px;
 }
 
 
-.decoracao{
+/* =========================================================
+   DECORAÇÃO
+========================================================= */
 
-    width:490px;
+.dots-decoration{
 
-    height:3px;
+    width:220px;
 
-    border-top:3px dotted var(--rosa-medio);
+    height:100px;
 
     position:relative;
 }
 
-
-.decoracao::after{
-
-    content:"♡";
+.dots-decoration span{
 
     position:absolute;
 
-    right:-15px;
+    width:10px;
 
-    top:-20px;
+    height:10px;
 
-    color:var(--rosa-medio);
+    border-radius:50%;
+}
 
-    font-size:28px;
+.d1{
+    right:170px;
+    top:10px;
+    background:#ef7898;
+}
+
+.d2{
+    right:115px;
+    top:32px;
+    background:#f5a4b8;
+}
+
+.d3{
+    right:65px;
+    top:10px;
+    background:#99001f;
+}
+
+.d4{
+    right:20px;
+    top:40px;
+    background:#ef7898;
+}
+
+.d5{
+    right:95px;
+    top:70px;
+    background:#ef7898;
+}
+
+.d6{
+    right:40px;
+    top:78px;
+    background:#f5a4b8;
 }
 
 
 /* =========================================================
-   LOGO
-========================================================= */
-
-.logo-destaque{
-
-    width: 140px;
-
-    height: 140px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:var(--vinho);
-
-    text-align:center;
-
-    background:white;
-
-    box-shadow:0 8px 20px rgba(139,0,31,.08);
-
-    overflow:hidden;
-
-    padding:15px;
-}
-
-
-.logo-destaque img{
-
-    width: 140px;
-
-    height: 140px;
-
-    object-fit:contain;
-
-    margin-bottom:6px;
-}
-
-
-
-/* =========================================================
-   MENU
-   SOMENTE PRODUTOS E VENDAS
+   MENU PRINCIPAL
 ========================================================= */
 
 .nav{
 
     display:grid;
 
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns:repeat(3,1fr);
 
-    gap:20px;
-
-    margin-bottom:30px;
+    gap:45px;
 
     width:100%;
-}
 
+    margin-bottom:30px;
+}
 
 .nav a{
 
+    min-height:138px;
+
+    border-radius:17px;
+
     text-decoration:none;
 
-    min-height:125px;
+    display:flex;
 
-    border-radius:20px;
+    align-items:center;
 
-    background:#FFD8E3;
+    gap:25px;
+
+    padding:20px 30px;
 
     color:var(--vinho);
 
-    display:flex;
+    background:#ffe1e9;
 
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    font-weight:600;
-
-    font-size:15px;
+    transition:.25s;
 
     border:1px solid transparent;
-
-    transition:.3s;
-
-    padding:20px;
 }
-
-
-.nav-icon{
-
-    width:48px;
-
-    height:48px;
-
-    margin-bottom:12px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-}
-
-
-.nav-icon img{
-
-    width:00%;
-
-    height:100%;
-
-    object-fit:contain;
-}
-
 
 .nav a:first-child{
 
-    background:var(--vinho);
+    background:
+        linear-gradient(
+            135deg,
+            #a9002c,
+            #87001e
+        );
 
     color:white;
 }
 
+.nav a:nth-child(2){
+
+    background:
+        linear-gradient(
+            135deg,
+            #ed6f91,
+            #e85d83
+        );
+
+    color:white;
+}
+
+.nav a:nth-child(3){
+
+    background:#ffdce5;
+
+    color:var(--vinho);
+}
 
 .nav a:hover{
 
     transform:translateY(-4px);
 
-    border-color:var(--vinho);
+    box-shadow:0 10px 25px rgba(139,0,31,.15);
+}
 
-    box-shadow:0 8px 20px rgba(139,0,31,.12);
+.nav-icon{
+
+    min-width:98px;
+
+    width:98px;
+
+    height:98px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.88);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.nav-icon img{
+
+    width:80px;
+
+    height:80px;
+
+    object-fit:contain;
 }
 
 
-/* =========================================================
-   KPIs
-   SOMENTE VENDAS E PRODUTOS
-========================================================= */
+.nav-text{
 
-.kpis{
-
-    display:grid;
-
-    grid-template-columns:repeat(2, 1fr);
-
-    gap:20px;
-
-    margin-bottom:30px;
-
-    width:100%;
+    flex:1;
 }
 
-
-.kpi{
-
-    min-height:150px;
-
-    padding:28px;
-
-    border-radius:20px;
-
-    background:white;
-
-    border:1px solid var(--borda);
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:.3s;
-}
-
-
-.kpi:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:0 8px 20px rgba(139,0,31,.08);
-}
-
-
-.kpi::after{
-
-    position:absolute;
-
-    right:25px;
-
-    bottom:5px;
-
-    font-size:65px;
-
-    color:var(--rosa);
-
-    opacity:.7;
-}
-
-
-.kpi:first-child::after{
-    content:"♡";
-}
-
-
-.kpi:last-child::after{
-    content:"♡";
-}
-
-
-.label{
-
-    color:var(--vinho);
-
-    font-size:13px;
-
-    font-weight:600;
-
-    text-transform:uppercase;
-
-    margin-bottom:12px;
-}
-
-
-.value{
+.nav-text h3{
 
     font-family:"Bodoni Moda", Georgia, serif;
 
-    color:var(--vinho);
+    font-size:21px;
 
-    font-size:45px;
+    font-weight:500;
 
-    font-weight:600;
+    margin-bottom:5px;
+}
+
+.nav-text p{
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    max-width:180px;
+}
+
+.nav-arrow{
+
+    font-size:30px;
+
+    font-weight:300;
 }
 
 
 /* =========================================================
-   PARTE INFERIOR
-   SOMENTE OS DOIS BLOCOS
+   SEGUNDA ÁREA
 ========================================================= */
 
-.bottom-area{
+.middle{
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1.05fr 1fr 1.05fr;
 
-    gap:20px;
+    gap:28px;
 
-    margin-top:5px;
+    margin-bottom:30px;
+}
 
-    width:100%;
+.middle-box{
+
+    min-height:318px;
+
+    border:1px solid var(--borda);
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.45);
+
+    padding:22px;
+
+    overflow:hidden;
 }
 
 
 /* =========================================================
-   INFORMAÇÃO
+   FRASE DO DIA
 ========================================================= */
 
-.info-box{
+.quote-title{
 
-    background:white;
+    font-family:"Bodoni Moda", Georgia, serif;
 
-    border:1px solid var(--borda);
+    font-size:18px;
 
-    border-radius:22px;
+    color:var(--vinho);
 
-    padding:28px;
+    margin-bottom:20px;
+
+    padding-left:8px;
+}
+
+.quote-content{
+
+    min-height:245px;
 
     display:flex;
 
     flex-direction:column;
 
+    align-items:center;
+
     justify-content:center;
 
-    min-height:235px;
+    text-align:center;
+
+    position:relative;
+}
+
+.quote-mark{
+
+    position:absolute;
+
+    top:-3px;
+
+    font-family:Georgia,serif;
+
+    font-size:65px;
+
+    color:var(--rosa);
+
+    opacity:.85;
+}
+
+.quote-text{
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:23px;
+
+    font-style:italic;
+
+    line-height:1.45;
+
+    color:var(--vinho);
+
+    max-width:330px;
+
+    margin-top:25px;
+}
+
+.quote-script{
+
+    font-family:"Allura", cursive;
+
+    font-size:40px;
+
+    color:var(--rosa-forte);
+
+    line-height:1.1;
+
+    margin-top:8px;
+}
+
+.quote-footer{
+
+    font-size:9px;
+
+    letter-spacing:5px;
+
+    color:var(--vinho);
+
+    margin-top:20px;
+}
+
+.quote-heart{
+
+    color:var(--vinho);
+
+    font-size:20px;
+
+    margin-top:5px;
 }
 
 
-.info-top{
+/* =========================================================
+   VENDEDORES
+========================================================= */
+
+.sellers-title{
+
+    text-align:center;
+
+    font-family:"Allura", cursive;
+
+    font-size:30px;
+
+    color:var(--vinho);
+
+    margin-bottom:12px;
+
+    position:relative;
+}
+
+.sellers-title::after{
+
+    content:"";
+
+    width:110px;
+
+    height:1px;
+
+    background:var(--rosa);
+
+    position:absolute;
+
+    bottom:-2px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+}
+
+.sellers{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:55px;
+
+    margin-top:12px;
+}
+
+.seller{
+
+    text-align:center;
+}
+
+.seller-photo{
+
+    width:125px;
+
+    height:125px;
+
+    border-radius:50%;
+
+    padding:4px;
+
+    border:2px solid var(--rosa);
+
+    background:white;
+
+    overflow:hidden;
+
+    margin:auto;
+}
+
+.seller-photo img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+}
+
+.seller-name{
+
+    font-family:"Allura", cursive;
+
+    color:var(--rosa-forte);
+
+    font-size:28px;
+
+    margin-top:4px;
+}
+
+.seller-role{
+
+    display:inline-block;
+
+    background:#ffe0e8;
+
+    border-radius:20px;
+
+    padding:5px 14px;
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:12px;
+
+    color:var(--vinho);
+
+    margin-top:2px;
+}
+
+.seller-role::before{
+
+    content:"♥";
+
+    margin-right:5px;
+
+    color:var(--vinho);
+}
+
+.all-sellers{
+
+    width:75%;
+
+    height:38px;
+
+    margin:17px auto 0;
+
+    border:1px solid var(--rosa);
+
+    border-radius:9px;
+
+    background:transparent;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    color:var(--vinho);
+
+    text-decoration:none;
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:14px;
+}
+
+.all-sellers:hover{
+
+    background:#fff0f4;
+}
+
+
+/* =========================================================
+   ATALHOS
+========================================================= */
+
+.shortcuts-title{
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:18px;
+
+    color:var(--vinho);
+
+    margin-bottom:8px;
+
+    padding-left:8px;
+}
+
+.shortcut{
+
+    min-height:54px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    border-bottom:1px solid #f2d3dc;
+
+    text-decoration:none;
+
+    color:var(--vinho);
+
+    padding:7px 4px;
+
+    transition:.2s;
+}
+
+.shortcut:last-child{
+
+    border-bottom:none;
+}
+
+.shortcut:hover{
+
+    padding-left:10px;
+
+    background:#fff5f7;
+}
+
+.shortcut-icon{
+
+    width:47px;
+
+    height:47px;
+
+    border-radius:50%;
+
+    background:#ffe7ed;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.shortcut-icon img{
+
+    width:27px;
+
+    height:27px;
+
+    object-fit:contain;
+}
+
+.shortcut-text{
+
+    flex:1;
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:14px;
+}
+
+.shortcut-arrow{
+
+    font-size:25px;
+
+    color:var(--vinho);
+}
+
+
+/* =========================================================
+   PARTE INFERIOR / ESTATÍSTICAS
+========================================================= */
+
+.bottom-panel{
+
+    display:grid;
+
+    grid-template-columns:1.25fr 1fr 1fr 1fr;
+
+    min-height:162px;
+
+    border:1px solid var(--borda);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.55);
+}
+
+
+/* =========================================================
+   DICA CHERRY
+========================================================= */
+
+.cherry-tip{
+
+    padding:25px;
 
     display:flex;
 
@@ -629,33 +1138,37 @@ body{
 
     gap:18px;
 
-    margin-bottom:22px;
+    background:linear-gradient(
+        135deg,
+        #fff0f4,
+        #ffe3eb
+    );
 }
 
+.tip-icon{
 
-.info-icon{
+    min-width:70px;
 
-    min-width:75px;
+    width:70px;
 
-    width:75px;
-
-    height:75px;
+    height:70px;
 
     border-radius:50%;
 
-    background:var(--rosa);
+    background:white;
 
     display:flex;
 
+    align-items:center;
+
     justify-content:center;
 
-    align-items:center;
+    border:1px solid #f5c0cf;
 
     overflow:hidden;
 }
 
-
-.info-icon img{
+.tip-icon img{
 
     width:100%;
 
@@ -663,205 +1176,134 @@ body{
 
     object-fit:contain;
 
-    padding:8px;
+    padding:7px;
 }
 
-
-.info-box h3{
+.tip-text h3{
 
     font-family:"Bodoni Moda", Georgia, serif;
 
-    font-size:25px;
+    font-size:18px;
+
+    font-weight:500;
 
     color:var(--vinho);
 
     margin-bottom:5px;
 }
 
+.tip-text h3::after{
 
-.info-box p{
+    content:" ♡";
 
-    color:var(--muted);
-
-    font-size:14px;
-
-    line-height:1.6;
+    color:var(--rosa-forte);
 }
 
-
-/* =========================================================
-   OBSERVAÇÃO
-========================================================= */
-
-.observacao{
-
-    background:#FFF1F5;
-
-    border:1px solid #F5B9CB;
-
-    border-radius:15px;
-
-    padding:16px 18px;
-
-    color:var(--texto);
+.tip-text p{
 
     font-size:12px;
 
-    line-height:1.5;
-}
+    line-height:1.6;
 
-
-.observacao strong{
     color:var(--vinho);
+
+    max-width:270px;
 }
 
 
 /* =========================================================
-   CARD PROMOCIONAL
+   STAT
 ========================================================= */
 
-.promo{
-
-    min-height:235px;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(139,0,31,.95),
-            rgba(105,0,22,.98)
-        );
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:30px;
-
-    color:white;
+.stat{
 
     display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-}
-
-
-.promo::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:160px;
-
-    height:160px;
-
-    border-radius:50%;
-
-    background:rgba(255,193,214,.15);
-
-    right:-50px;
-
-    top:-60px;
-}
-
-
-.promo::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-
-    height:100px;
-
-    border-radius:50%;
-
-    background:rgba(255,193,214,.1);
-
-    right:70px;
-
-    bottom:-50px;
-}
-
-
-.promo small{
-
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    color:var(--rosa);
-
-    margin-bottom:12px;
-}
-
-
-.promo h3{
-
-    font-family:"Bodoni Moda", Georgia, serif;
-
-    font-size:27px;
-
-    font-weight:500;
-
-    margin-bottom:10px;
-}
-
-
-.promo p{
-
-    color:#FFDCE7;
-
-    font-family:"Bodoni Moda", Georgia, serif;
-
-    font-style:italic;
-
-    font-size:18px;
-
-    max-width:260px;
-}
-
-
-/* =========================================================
-   IMAGEM DO PRODUTO
-========================================================= */
-
-.makeup{
-
-    position:absolute;
-
-    right:15px;
-
-    bottom:5px;
-
-    width:170px;
-
-    height:170px;
-
-    display:flex;
-
-    justify-content:center;
 
     align-items:center;
 
-    z-index:2;
+    gap:18px;
 
-    overflow:hidden;
+    padding:25px;
+
+    border-left:1px dashed var(--rosa);
 }
 
+.stat-icon{
 
-.makeup img{
+    width:70px;
 
-    width:100%;
+    height:70px;
 
-    height:100%;
+    min-width:70px;
+
+    border-radius:50%;
+
+    background:#ffd9e3;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.stat-icon img{
+
+    width:38px;
+
+    height:38px;
 
     object-fit:contain;
+}
+
+.stat-info small{
+
+    display:block;
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    color:var(--vinho);
+
+    font-size:14px;
+
+    margin-bottom:2px;
+}
+
+.stat-info strong{
+
+    display:block;
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:34px;
+
+    line-height:1;
+
+    color:var(--vinho);
+
+    font-weight:500;
+}
+
+.stat-link{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:var(--vinho);
+
+    font-family:"Bodoni Moda", Georgia, serif;
+
+    font-size:13px;
+
+    text-decoration:none;
+}
+
+.stat-link::after{
+
+    content:"  ›";
+
+    font-size:20px;
 }
 
 
@@ -869,127 +1311,222 @@ body{
    RESPONSIVO
 ========================================================= */
 
-@media(max-width:1000px){
-
-    body{
-        padding:20px;
-    }
-
-
-    .card{
-        padding:35px;
-    }
-
-
-    .welcome{
-        align-items:flex-start;
-    }
-
-
-    .logo-destaque{
-        width:140px;
-        height:140px;
-    }
-
-
-    .logo-destaque img{
-        width:70px;
-        height:70px;
-    }
-
-
-    .welcome-text h2{
-        font-size:40px;
-    }
-
-}
-
-
-@media(max-width:700px){
-
-    body{
-        padding:10px;
-    }
-
+@media(max-width:1200px){
 
     .topbar{
 
-        padding:25px;
+        padding:25px 35px;
+    }
 
-        flex-direction:column;
+    .card{
 
-        align-items:flex-start;
+        padding:30px 35px;
+    }
+
+    .dashboard-title{
+
+        margin-left:0;
+    }
+
+    .middle{
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .middle-box:last-child{
+
+        grid-column:1 / -1;
+    }
+
+    .bottom-panel{
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .cherry-tip{
+
+        grid-column:1 / -1;
+    }
+
+    .stat{
+
+        border-top:1px dashed var(--rosa);
+    }
+}
+
+
+@media(max-width:850px){
+
+    .topbar{
+
+        flex-wrap:wrap;
 
         gap:20px;
     }
 
+    .dashboard-title{
 
-    .pill{
+        order:3;
 
-        width:100%;
-
-        text-align:center;
-
-        white-space:normal;
-    }
-
-
-    .card{
-        padding:25px;
-    }
-
-
-    .welcome{
-
-        flex-direction:column;
-
-        gap:25px;
-    }
-
-
-    .welcome-text h2{
-        font-size:35px;
-    }
-
-
-    .decoracao{
         width:100%;
     }
 
+    .top-actions{
 
-    .logo-destaque{
-        align-self:center;
+        margin-left:auto;
     }
-
 
     .nav{
 
         grid-template-columns:1fr;
-
     }
 
-
-    .kpis{
+    .middle{
 
         grid-template-columns:1fr;
-
     }
 
+    .middle-box:last-child{
 
-    .bottom-area{
+        grid-column:auto;
+    }
+
+    .bottom-panel{
 
         grid-template-columns:1fr;
-
     }
 
+    .cherry-tip{
 
-    .makeup{
-
-        width:130px;
-
-        height:130px;
+        grid-column:auto;
     }
 
+    .stat{
+
+        border-left:none;
+
+        border-top:1px dashed var(--rosa);
+    }
+}
+
+
+@media(max-width:600px){
+
+    body{
+
+        padding:0;
+    }
+
+    .container{
+
+        border-radius:0;
+    }
+
+    .topbar{
+
+        padding:20px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .brand h1{
+
+        font-size:32px;
+    }
+
+    .brand h1 span{
+
+        font-size:34px;
+    }
+
+    .top-actions{
+
+        width:100%;
+    }
+
+    .user-pill{
+
+        flex:1;
+
+        min-width:0;
+    }
+
+    .card{
+
+        padding:25px 18px;
+    }
+
+    .welcome{
+
+        align-items:flex-start;
+    }
+
+    .welcome-text h2{
+
+        font-size:43px;
+    }
+
+    .dots-decoration{
+
+        display:none;
+    }
+
+    .nav a{
+
+        min-height:120px;
+
+        padding:18px;
+    }
+
+    .nav-icon{
+
+        width:75px;
+
+        min-width:75px;
+
+        height:75px;
+    }
+
+    .nav-icon img{
+
+        width:45px;
+
+        height:45px;
+    }
+
+    .sellers{
+
+        gap:20px;
+    }
+
+    .seller-photo{
+
+        width:95px;
+
+        height:95px;
+    }
+
+    .seller-name{
+
+        font-size:24px;
+    }
+
+    .bottom-panel{
+
+        display:block;
+    }
+
+    .cherry-tip{
+
+        padding:20px;
+    }
+
+    .stat{
+
+        padding:20px;
+    }
 }
 
 </style>
@@ -1003,57 +1540,134 @@ body{
 <div class="container">
 
 
-    <!-- =====================================================
-         TOPO
-    ====================================================== -->
+<!-- =====================================================
+     TOPO
+====================================================== -->
 
-    <div class="topbar">
-
-
-        <div class="brand">
+<div class="topbar">
 
 
-            <div class="cherry-logo">
+    <!-- LOGO -->
+
+    <div class="brand">
+
+        <div class="cherry-logo">
+
+            <img
+                src="public/assets/img/cherry3.png"
+                alt="Logo Cherry Make"
+            >
+
+        </div>
+
+
+        <div>
+
+            <h1>
+                Cherry <span>Make♡</span>
+            </h1>
+
+            <small>
+                Maquiagem que realça você ♥
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- USUÁRIO -->
+
+    <div class="top-actions">
+
+        <div class="notification">
+            ✉
+
+            <span class="number">
+                3
+            </span>
+
+        </div>
+
+
+        <div class="vertical-line"></div>
+
+
+        <div class="user-pill">
+
+            <div class="user-icon">
 
                 <img
                     src="public/assets/img/cherry2.png"
-                    alt="Logo Cherry Make"
+                    alt="Cherry Make"
                 >
 
             </div>
 
 
-            <div>
-
-                <h1>
-                    Cherry Make
-                </h1>
+            <div class="user-info">
 
                 <small>
-                    Maquiagem que realça você
+                    Bem-vinda,
                 </small>
+
+                <strong>
+                    <?php echo htmlspecialchars($nome); ?>
+                </strong>
 
             </div>
 
 
+            <div class="user-arrow">
+               ⌄
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     CONTEÚDO
+====================================================== -->
+
+<div class="card">
+
+
+    <!-- =================================================
+         BOAS-VINDAS
+    ================================================== -->
+
+    <div class="welcome">
+
+
+        <div class="welcome-text">
+
+            <h3>
+                Bem-vinda de volta,
+            </h3>
+
+            <h2>
+                <?php echo htmlspecialchars($nome); ?>!
+            </h2>
+
+            <p>
+                Vamos juntas transformar beleza em confiança.
+            </p>
+
         </div>
 
 
-        <div class="pill">
+        <div class="dots-decoration">
 
-            Logado como
-
-            <strong>
-                <?php echo htmlspecialchars($nome); ?>
-            </strong>
-
-            (<?php echo htmlspecialchars($perfil); ?>)
-
-            •
-
-            <a href="/lojacosmeticos_alalet/index.php?controller=auth&action=logout">
-                Sair
-            </a>
+            <span class="d1"></span>
+            <span class="d2"></span>
+            <span class="d3"></span>
+            <span class="d4"></span>
+            <span class="d5"></span>
+            <span class="d6"></span>
 
         </div>
 
@@ -1061,241 +1675,226 @@ body{
     </div>
 
 
+    <!-- =================================================
+         MENU PRINCIPAL
+    ================================================== -->
 
-    <!-- =====================================================
-         CONTEÚDO
-    ====================================================== -->
-
-    <div class="card">
-
-
-        <!-- BOAS-VINDAS -->
-
-        <div class="welcome">
+    <div class="nav">
 
 
-            <div class="welcome-text">
+        <!-- PRODUTOS -->
 
-                <h2>
+        <a href="/lojacosmeticos_alalet/index.php?controller=produto&action=index">
 
-                    Olá,
-
-                    <span>
-                        <?php echo htmlspecialchars($nome); ?>!
-                    </span>
-
-                </h2>
-
-
-                <p>
-                    Bem-vindo(a) ao painel de controle da Cherry Make.
-                </p>
-
-
-                <div class="decoracao"></div>
-
-            </div>
-
-
-
-            <div class="logo-destaque">
+            <div class="nav-icon">
 
                 <img
-                    src="public/assets/img/logocherrymake.png"
-                    alt="Logo Cherry Make"
+                    src="public/assets/img/produtos3.png"
+                    alt="Produtos"
                 >
 
+            </div>
+
+
+            <div class="nav-text">
+
+                <h3>
+                    Produtos / Categorias
+                </h3>
+
+                <p>
+                    Cadastre e gerencie seus
+                    produtos e categorias
+                </p>
+
+            </div>
+
+            <div class="nav-arrow">
+                ›
+            </div>
+
+        </a>
+
+
+        <!-- VENDAS -->
+
+        <a href="/lojacosmeticos_alalet/index.php?controller=venda&action=index">
+
+            <div class="nav-icon">
+
+                <img
+                    src="public/assets/img/venda3.png"
+                    alt="Vendas"
+                >
 
             </div>
 
 
-        </div>
+            <div class="nav-text">
+
+                <h3>
+                    Vendas
+                </h3>
+
+                <p>
+                    Registre e acompanhe
+                    suas vendas
+                </p>
+
+            </div>
+
+            <div class="nav-arrow">
+                ›
+            </div>
+
+        </a>
 
 
+        <!-- SITE -->
 
-        <!-- =================================================
-             SOMENTE PRODUTOS E VENDAS
-        ================================================== -->
+        <a href="/lojacosmeticos_alalet/index.php?controller=site&action=index">
 
-        <div class="nav">
-
-
-            <a href="/lojacosmeticos_alalet/index.php?controller=produto&action=index">
-
-
-                <div class="nav-icon">
-
-                    <img
-                        src="public/assets/img/produtos.png"
-                        alt="Produtos"
-                    >
-
-                </div>
-
-
-                Produtos / Categorias
-
-
-            </a>
-
-
-
-            <a href="/lojacosmeticos_alalet/index.php?controller=venda&action=index">
-
-
-                <div class="nav-icon">
-
-                    <img
-                        src="public/assets/img/vendas.png"
-                        alt="Vendas"
-                    >
-
-                </div>
-
-
-                Vendas
-
-
-            </a>
-
-
-        </div>
-
-
-
-        <!-- =================================================
-             SOMENTE VENDAS E PRODUTOS
-        ================================================== -->
-
-        <div class="kpis">
-
-
-            <div class="kpi">
-
-                <div class="label">
-                    Vendas (mês)
-                </div>
-
-                <div class="value">
-                    0
-                </div>
+            <div class="nav-icon">
+            <img
+                            src="public/assets/img/site3.png"
+                            
+                        >
 
             </div>
 
 
+            <div class="nav-text">
 
-            <div class="kpi">
+                <h3>
+                    Site Oficial
+                </h3>
 
-                <div class="label">
-                    Produtos
+                <p>
+                    Acesse e gerencie
+                    o site da loja
+                </p>
+
+            </div>
+
+            <div class="nav-arrow">
+                ›
+            </div>
+
+        </a>
+
+
+    </div>
+
+
+    <!-- =================================================
+         ÁREA CENTRAL
+    ================================================== -->
+
+    <div class="middle">
+
+
+        <!-- =================================================
+             FRASE DO DIA
+        ================================================== -->
+
+        <div class="middle-box">
+
+            <div class="quote-title">
+                Frase do dia ♡
+            </div>
+
+
+            <div class="quote-content">
+
+                <div class="quote-mark">
+                    “
                 </div>
 
-                <div class="value">
-                    0
+                <div class="quote-text">
+
+                    Cada detalhe importa,
+                    <br>
+                    cada cliente também.
+
+                </div>
+
+
+                <div class="quote-script">
+
+                    Você faz a
+                    <br>
+                    diferença! ♡
+
+                </div>
+
+
+                <div class="quote-footer">
+                    CHERRY MAKE
+                </div>
+
+                <div class="quote-heart">
+                    ♥
                 </div>
 
             </div>
 
-
         </div>
 
 
-
         <!-- =================================================
-             PARTE INFERIOR
+             VENDEDORES
         ================================================== -->
 
-        <div class="bottom-area">
+        <div class="middle-box">
+
+            <div class="sellers-title">
+                Nossas Vendedoras ♡
+            </div>
 
 
-            <!-- INFORMAÇÃO -->
-
-            <div class="info-box">
+            <div class="sellers">
 
 
-                <div class="info-top">
+                <div class="seller">
 
-
-                    <div class="info-icon">
+                    <div class="seller-photo">
 
                         <img
-                            src="public/assets/img/perfil.png"
-                            alt="Cherry Make"
+                            src="public/assets/img/let.png"
+                            alt="Letícia"
                         >
 
                     </div>
 
+                    <div class="seller-name">
+                        Letícia
+                    </div>
 
-                    <div>
+                    <div class="seller-role">
+                        Vendedora
+                    </div>
 
-                        <h3>
-                            Bem-vindo(a),
-                            <?php echo htmlspecialchars($nome); ?>!
-                        </h3>
+                </div>
 
 
-                        <p>
+                <div class="seller">
 
-                            Escolha um dos módulos acima para continuar
-                            utilizando o sistema da Cherry Make.
+                    <div class="seller-photo">
 
-                        </p>
+                        <img
+                            src="public/assets/img/lana.png"
+                            alt="Alanna"
+                        >
 
                     </div>
 
+                    <div class="seller-name">
+                       Alanna
+                    </div>
 
-                </div>
-
-
-
-                <div class="observacao">
-
-                    <strong>
-                        ♡ Observação:
-                    </strong>
-
-                    Esses números serão alimentados quando implementarmos
-                    os módulos de vendas e estoque.
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- CARD PROMOCIONAL -->
-
-            <div class="promo">
-
-
-                <small>
-                    CHERRY MAKE
-                </small>
-
-
-                <h3>
-
-                    Maquiagem que
-                    <br>
-                    realça você.
-
-                </h3>
-
-
-                <p>
-
-                    Beleza, delicadeza e estilo em cada detalhe.
-
-                </p>
-
-
-                <div class="makeup">
-
-                    <img
-                        src="public/assets/img/produto.png"
-                        alt="Produto Cherry Make"
-                    >
+                    <div class="seller-role">
+                        Vendedora
+                    </div>
 
                 </div>
 
@@ -1306,7 +1905,264 @@ body{
         </div>
 
 
+        <!-- =================================================
+             ATALHOS
+        ================================================== -->
+
+        <div class="middle-box">
+
+            <div class="shortcuts-title">
+                Atalhos rápidos ♡
+            </div>
+
+
+            <!-- PRODUTO -->
+
+            <a
+                href="/lojacosmeticos_alalet/index.php?controller=produto&action=index"
+                class="shortcut"
+            >
+
+                <div class="shortcut-icon">
+
+                    <img
+                        src="public/assets/img/produtos2.png"
+                        alt="Produto"
+                    >
+
+                </div>
+
+                <div class="shortcut-text">
+                    Adicionar produto
+                </div>
+
+                <div class="shortcut-arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            <!-- CATEGORIA -->
+
+            <a
+                href="/lojacosmeticos_alalet/index.php?controller=produto&action=index"
+                class="shortcut"
+            >
+
+                <div class="shortcut-icon">
+
+                    <span style="font-size:25px;">
+                    ☆
+                    </span>
+
+                </div>
+
+                <div class="shortcut-text">
+                    Adicionar categoria
+                </div>
+
+                <div class="shortcut-arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            <!-- VENDA -->
+
+            <a
+                href="/lojacosmeticos_alalet/index.php?controller=venda&action=index"
+                class="shortcut"
+            >
+
+                <div class="shortcut-icon">
+
+                    <img
+                        src="public/assets/img/vendas.png"
+                        alt="Venda"
+                    >
+
+                </div>
+
+                <div class="shortcut-text">
+                    Registrar venda
+                </div>
+
+                <div class="shortcut-arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            
+
+
+
+        </div>
+
+
     </div>
+
+
+    <!-- =================================================
+         ESTATÍSTICAS
+    ================================================== -->
+
+    <div class="bottom-panel">
+
+
+        <!-- =================================================
+             DICA
+        ================================================== -->
+
+        <div class="cherry-tip">
+
+            <div class="tip-icon">
+
+                <img
+                    src="public/assets/img/cherry2.png"
+                    alt="Cherry Make"
+                >
+
+            </div>
+
+
+            <div class="tip-text">
+
+                <h3>
+                    Dica Cherry
+                </h3>
+
+                <p>
+                    Mantenha seus produtos e vendas
+                    sempre atualizados para oferecer
+                    a melhor experiência!
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PRODUTOS
+        ================================================== -->
+
+        <div class="stat">
+
+            <div class="stat-icon">
+
+                <img
+                    src="public/assets/img/produtos2.png"
+                    alt="Produtos"
+                >
+
+            </div>
+
+
+            <div class="stat-info">
+
+                <small>
+                    Produtos cadastrados
+                </small>
+
+                <strong>
+                    0
+                </strong>
+
+                <a
+                    href="/lojacosmeticos_alalet/index.php?controller=produto&action=index"
+                    class="stat-link"
+                >
+                    Ver todos
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             VENDAS
+        ================================================== -->
+
+        <div class="stat">
+
+            <div class="stat-icon">
+
+                <img
+                    src="public/assets/img/vendas.png"
+                    alt="Vendas"
+                >
+
+            </div>
+
+
+            <div class="stat-info">
+
+                <small>
+                    Vendas registradas
+                </small>
+
+                <strong>
+                    0
+                </strong>
+
+                <a
+                    href="/lojacosmeticos_alalet/index.php?controller=venda&action=index"
+                    class="stat-link"
+                >
+                    Ver todas
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CATEGORIAS
+        ================================================== -->
+
+        <div class="stat">
+
+            <div class="stat-icon">
+
+                <span style="font-size:38px;color:#99001f;">
+                    ☆
+                </span>
+
+            </div>
+
+
+            <div class="stat-info">
+
+                <small>
+                    Categorias ativas
+                </small>
+
+                <strong>
+                    5
+                </strong>
+
+                <a
+                    href="/lojacosmeticos_alalet/index.php?controller=produto&action=index"
+                    class="stat-link"
+                >
+                    Ver todas
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
 
 
 </div>
