@@ -3,8 +3,10 @@
 $nome = $_SESSION['nome'] ?? 'Cliente';
 
 $produtos = [
-    ['nome' => 'Paleta de Sombras - Cherry Blossom ', 'preco' => '99,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras - Cherry Blossom ', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Base Matte - Cherry Luxury', 'preco' => '59,90', 'imagem' => 'public/assets/img/base.png'],
     ['nome' => 'Pó Translúcido Matte 10g - Cloud Touch', 'preco' => '29,90', 'imagem' => 'public/assets/img/po.png'],
+    ['nome' => 'Corretivo - Fancy', 'preco' => '39,90', 'imagem' => 'public/assets/img/corretivo.png'],
     ['nome' => 'Lápis de olho - Berry Eye', 'preco' => '9,90', 'imagem' => 'public/assets/img/lapis.png'],
     ['nome' => 'Máscara de Cílios 10g - Lash Drama', 'preco' => '29,90', 'imagem' => 'public/assets/img/rimel.png'],
     ['nome' => 'Sérum Primer Hidratante 30ml - Glass Skin', 'preco' => '39,90', 'imagem' => 'public/assets/img/serum.png'],
@@ -17,6 +19,11 @@ $produtos = [
     ['nome' => 'Batom Cremoso 10g', 'preco' => '34,90', 'imagem' => 'public/assets/img/batom-cremoso.png'],
     ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
     ['nome' => 'Lápis Delineador para Olhos à Prova d’água', 'preco' => '19,90', 'imagem' => 'public/assets/img/lapis.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
     ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
     ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
     ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
