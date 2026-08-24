@@ -18,6 +18,12 @@ $produtos = [
     ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
     ['nome' => 'Lápis Delineador para Olhos à Prova d’água', 'preco' => '19,90', 'imagem' => 'public/assets/img/lapis.png'],
     ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
+
+
+    
 ];
 // Imagens do carrossel principal.
 // As 3 imagens devem ficar DIRETAMENTE dentro de public/assets/img/
