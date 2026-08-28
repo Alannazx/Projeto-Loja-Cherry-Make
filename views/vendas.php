@@ -106,8 +106,8 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
         }
 
         .brand-logo img{
-            width:100%;
-            height:100%;
+            width: 140%;
+            height:140%;
             object-fit:contain;
             padding:5px;
         }
@@ -193,13 +193,11 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
             display:flex;
             align-items:center;
             justify-content:center;
-            background:#fff;
-            box-shadow:0 8px 20px rgba(139,0,31,.07);
         }
 
         .logo-destaque img{
-            width:88px;
-            height:88px;
+            width:110px;
+            height:110px;
             object-fit:contain;
         }
 
@@ -461,7 +459,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
             </div>
 
             <div class="logo-destaque">
-                <img src="/lojacosmeticos_alalet/public/assets/img/logocherrymake.png" alt="Cherry Make">
+                <img src="/lojacosmeticos_alalet/public/assets/img/cherrysemfundo.png" alt="Cherry Make">
             </div>
         </section>
 
