@@ -3,34 +3,22 @@
 $nome = $_SESSION['nome'] ?? 'Cliente';
 
 $produtos = [
-    ['nome' => 'Paleta de Sombras - Cherry Blossom ', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Base Matte - Cherry Luxury', 'preco' => '59,90', 'imagem' => 'public/assets/img/base.png'],
-    ['nome' => 'Pó Translúcido Matte 10g - Cloud Touch', 'preco' => '29,90', 'imagem' => 'public/assets/img/po.png'],
-    ['nome' => 'Corretivo - Fancy', 'preco' => '39,90', 'imagem' => 'public/assets/img/corretivo.png'],
+    ['nome' => 'Paleta de Sombras - Cherry Blossom ', 'preco' => '69,90', 'imagem' => 'public/assets/img/paleta.png'],
+    ['nome' => 'Pó Translúcido Matte - Cloud Touch', 'preco' => '29,90', 'imagem' => 'public/assets/img/po.png'],
     ['nome' => 'Lápis de olho - Berry Eye', 'preco' => '9,90', 'imagem' => 'public/assets/img/lapis.png'],
-    ['nome' => 'Máscara de Cílios 10g - Lash Drama', 'preco' => '29,90', 'imagem' => 'public/assets/img/rimel.png'],
-    ['nome' => 'Sérum Primer Hidratante 30ml - Glass Skin', 'preco' => '39,90', 'imagem' => 'public/assets/img/serum.png'],
-    ['nome' => 'Spray Fixador de Maquiagem 120ml - Super Fix', 'preco' => '39,90', 'imagem' => 'public/assets/img/sprayfix.png'],
+    ['nome' => 'Máscara de Cílios - Lash Drama', 'preco' => '29,90', 'imagem' => 'public/assets/img/rimel.png'],
+    ['nome' => 'Base Matte Líquida - Skins ', 'preco' => '59,90', 'imagem' => 'public/assets/img/baseliquida.png'],
+    ['nome' => 'Spray Fixador de Maquiagem - Super Fix', 'preco' => '39,90', 'imagem' => 'public/assets/img/sprayfix.png'],
     ['nome' => 'Batom Matte - Ruby Flame', 'preco' => '25,90', 'imagem' => 'public/assets/img/batomred.png'],
-    ['nome' => 'Batom Líquido Matte 4ml', 'preco' => '29,90', 'imagem' => 'public/assets/img/batom-rosa.png'],
-    ['nome' => 'Batom Líquido Matte 4ml', 'preco' => '29,90', 'imagem' => 'public/assets/img/batom-vermelho.png'],
-    ['nome' => 'Pó Translúcido Matte 10g', 'preco' => '49,90', 'imagem' => 'public/assets/img/po.png'],
-    ['nome' => 'Máscara para Cílios Volume Extremo 10g', 'preco' => '39,90', 'imagem' => 'public/assets/img/mascara.png'],
-    ['nome' => 'Batom Cremoso 10g', 'preco' => '34,90', 'imagem' => 'public/assets/img/batom-cremoso.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Lápis Delineador para Olhos à Prova d’água', 'preco' => '19,90', 'imagem' => 'public/assets/img/lapis.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-    ['nome' => 'Paleta de Sombras Cherry Bloom', 'preco' => '89,90', 'imagem' => 'public/assets/img/paleta.png'],
-
-
-    
+    ['nome' => 'Blush Pinky Cheeks', 'preco' => '19,90', 'imagem' => 'public/assets/img/blush.png'],
+    ['nome' => 'Corretivo líquido - Flawless', 'preco' => '29,90', 'imagem' => 'public/assets/img/corretivo.png'],
+    ['nome' => 'Gloss - Cherry Glow', 'preco' => '39,90', 'imagem' => 'public/assets/img/gloss.png'],
+    ['nome' => 'Sérum Primer Hidratante  - Glass Skin', 'preco' => '39,90', 'imagem' => 'public/assets/img/serum.png'],
+    ['nome' => 'Esponja de Maquiagem - Red Blend', 'preco' => '9,90', 'imagem' => 'public/assets/img/esponjinha.png'],
+    ['nome' => 'Gel de Sobrancelha Beaty Brows', 'preco' => '9,90', 'imagem' => 'public/assets/img/gelsobrancelha.png'],
+    ['nome' => 'Iluminador Prateado - Metalic Cherry ', 'preco' => '19,90', 'imagem' => 'public/assets/img/iluminador.png'],
+    ['nome' => 'Kit Pincéis - Beauty Brushes', 'preco' => '49,90', 'imagem' => 'public/assets/img/kitpinceis.png'],
+   
 ];
 // Imagens do carrossel principal.
 // As 3 imagens devem ficar DIRETAMENTE dentro de public/assets/img/
