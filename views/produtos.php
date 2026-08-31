@@ -34,7 +34,7 @@ function estoqueProduto(array $produto): int
 <head>
 <meta charset="utf-8">
 <link rel="icon" href="/lojacosmeticos_alalet/public/assets/img/cherry.png">
-<title>Produtos</title>
+<title>Produtos | Cherry Make</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Poppins:wght@300;400;500;600;700&display=swap');
