@@ -31,7 +31,7 @@ class Produto
             $sql .= " WHERE p.ativo = 1 AND c.ativo = 1 ";
         }
 
-        $sql .= " ORDER BY p.id DESC";
+        $sql .= " ORDER BY p.id ASC";
 
         return $this->conn->query($sql)->fetchAll();
     }
