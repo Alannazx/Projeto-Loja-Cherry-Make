@@ -2069,7 +2069,7 @@ body{
                 </small>
 
                 <strong>
-                    0
+                    30
                 </strong>
 
                 <a
@@ -2107,7 +2107,7 @@ body{
                 </small>
 
                 <strong>
-                    0
+                    58
                 </strong>
 
                 <a
@@ -2144,7 +2144,7 @@ body{
                 </small>
 
                 <strong>
-                    5
+                    4
                 </strong>
 
                 <a
