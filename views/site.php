@@ -10,14 +10,19 @@ $produtos = [
     ['nome' => 'Base Matte Líquida - Skins ', 'preco' => '59,90', 'imagem' => 'public/assets/img/baseliquida.png'],
     ['nome' => 'Spray Fixador de Maquiagem - Super Fix', 'preco' => '39,90', 'imagem' => 'public/assets/img/sprayfix.png'],
     ['nome' => 'Batom Matte - Ruby Flame', 'preco' => '25,90', 'imagem' => 'public/assets/img/batomred.png'],
-    ['nome' => 'Blush Pinky Cheeks', 'preco' => '19,90', 'imagem' => 'public/assets/img/blush.png'],
+    ['nome' => 'Blush - Pinky Cheeks', 'preco' => '19,90', 'imagem' => 'public/assets/img/blush.png'],
     ['nome' => 'Corretivo líquido - Flawless', 'preco' => '29,90', 'imagem' => 'public/assets/img/corretivo.png'],
-    ['nome' => 'Gloss - Cherry Glow', 'preco' => '39,90', 'imagem' => 'public/assets/img/gloss.png'],
+    ['nome' => 'Gloss - Cherry Glow', 'preco' => '39,90', 'imagem' => 'public/assets/img/gloss10.png'],
     ['nome' => 'Sérum Primer Hidratante  - Glass Skin', 'preco' => '39,90', 'imagem' => 'public/assets/img/serum.png'],
     ['nome' => 'Esponja de Maquiagem - Red Blend', 'preco' => '9,90', 'imagem' => 'public/assets/img/esponjinha.png'],
-    ['nome' => 'Gel de Sobrancelha Beaty Brows', 'preco' => '9,90', 'imagem' => 'public/assets/img/gelsobrancelha.png'],
+    ['nome' => 'Gel de Sobrancelha - Beaty Brows', 'preco' => '9,90', 'imagem' => 'public/assets/img/gelsobrancelha.png'],
     ['nome' => 'Iluminador Prateado - Metalic Cherry ', 'preco' => '19,90', 'imagem' => 'public/assets/img/iluminador.png'],
     ['nome' => 'Kit Pincéis - Beauty Brushes', 'preco' => '49,90', 'imagem' => 'public/assets/img/kitpinceis.png'],
+    ['nome' => 'Necessaire - Beauty Case', 'preco' => '49,90', 'imagem' => 'public/assets/img/bolsa.png'],
+    ['nome' => 'Faixa de cabelo - Sweet Band', 'preco' => '9,90', 'imagem' => 'public/assets/img/faixa.png'],
+    ['nome' => 'Hidratante Labial - Lip Kiss', 'preco' => '15,90', 'imagem' => 'public/assets/img/hidratantelabial.png'],
+    ['nome' => 'Cílios Postiços - Dream Lashes', 'preco' => '9,90', 'imagem' => 'public/assets/img/cilios.png'],
+    ['nome' => 'Cherry Mystery Box', 'preco' => '59,90', 'imagem' => 'public/assets/img/cherrybox.png'],
    
 ];
 // Imagens do carrossel principal.
@@ -26,7 +31,7 @@ $produtos = [
 $heroImagens = [
     'public/assets/img/carrossel10.png',
     'public/assets/img/carrossel2.png',
-    'public/assets/img/carrossel3.png',
+    'public/assets/img/carrossel333.png',
 ];
 
 ?>
@@ -653,7 +658,7 @@ button{font-family:inherit}
 
         <div>
             <h4>ATENDIMENTO</h4>
-            <p>☎ (21) 99999-9999</p>
+            <p>☎ (21) 54321-9876</p>
             <p>✉ atendimento@cherrymake.com.br</p>
             <p>◉ Seg. à Sex. 9h às 18h</p>
         </div>
