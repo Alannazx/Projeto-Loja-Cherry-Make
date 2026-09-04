@@ -1,17 +1,4 @@
 <?php
-
-/**
- * Model de Vendas - Cherry Make
- *
- * Estrutura esperada da tabela `vendas`:
- *
- * CREATE TABLE vendas (
- *     id INT AUTO_INCREMENT PRIMARY KEY,
- *     data DATE NOT NULL,
- *     quantidade INT NOT NULL DEFAULT 1,
- *     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
- * );
- */
 class Venda
 {
     private PDO $db;
@@ -20,17 +7,30 @@ class Venda
     public function __construct(PDO $db)
     {
         $this->db = $db;
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+        $this->db->setAttribute(
+            PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION
+        );
+
+        $this->db->setAttribute(
+            PDO::ATTR_DEFAULT_FETCH_MODE,
+            PDO::FETCH_ASSOC
+        );
     }
 
     /**
      * Registra uma nova venda.
      */
-    public function criar(string $data, int $quantidade = 1): bool
-    {
+    public function criar(
+        string $data,
+        int $quantidade = 1
+    ): bool {
+
         if ($quantidade < 1) {
-            throw new InvalidArgumentException('A quantidade deve ser maior que zero.');
+            throw new InvalidArgumentException(
+                'A quantidade deve ser maior que zero.'
+            );
         }
 
         $sql = "
@@ -47,6 +47,28 @@ class Venda
     }
 
     /**
+     * Retorna TODAS as vendas de todos os meses.
+     *
+     * As vendas mais recentes aparecem primeiro.
+     */
+    public function listarTodos(): array
+    {
+        $sql = "
+            SELECT
+                id,
+                data,
+                quantidade,
+                created_at
+            FROM {$this->table}
+            ORDER BY data DESC, id DESC
+        ";
+
+        $stmt = $this->db->query($sql);
+
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Retorna todas as vendas de um determinado mês.
      *
      * $mes deve estar no formato YYYY-MM.
@@ -54,7 +76,9 @@ class Venda
     public function listarPorMes(string $mes): array
     {
         if (!preg_match('/^\d{4}-\d{2}$/', $mes)) {
-            throw new InvalidArgumentException('Mês inválido. Use o formato YYYY-MM.');
+            throw new InvalidArgumentException(
+                'Mês inválido. Use o formato YYYY-MM.'
+            );
         }
 
         $sql = "
@@ -69,7 +93,10 @@ class Venda
         ";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':mes' => $mes]);
+
+        $stmt->execute([
+            ':mes' => $mes
+        ]);
 
         return $stmt->fetchAll();
     }
@@ -80,7 +107,9 @@ class Venda
     public function totalPorMes(string $mes): int
     {
         if (!preg_match('/^\d{4}-\d{2}$/', $mes)) {
-            throw new InvalidArgumentException('Mês inválido. Use o formato YYYY-MM.');
+            throw new InvalidArgumentException(
+                'Mês inválido. Use o formato YYYY-MM.'
+            );
         }
 
         $sql = "
@@ -90,13 +119,18 @@ class Venda
         ";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':mes' => $mes]);
+
+        $stmt->execute([
+            ':mes' => $mes
+        ]);
 
         return (int) $stmt->fetchColumn();
     }
 
     /**
      * Retorna o total geral de vendas.
+     *
+     * Soma as vendas de TODOS os meses.
      */
     public function total(): int
     {
@@ -105,7 +139,9 @@ class Venda
             FROM {$this->table}
         ";
 
-        return (int) $this->db->query($sql)->fetchColumn();
+        return (int) $this->db
+            ->query($sql)
+            ->fetchColumn();
     }
 
     /**
@@ -114,14 +150,21 @@ class Venda
     public function buscarPorId(int $id): ?array
     {
         $sql = "
-            SELECT id, data, quantidade, created_at
+            SELECT
+                id,
+                data,
+                quantidade,
+                created_at
             FROM {$this->table}
             WHERE id = :id
             LIMIT 1
         ";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':id' => $id]);
+
+        $stmt->execute([
+            ':id' => $id
+        ]);
 
         $venda = $stmt->fetch();
 
@@ -139,7 +182,10 @@ class Venda
         ";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':id' => $id]);
+
+        $stmt->execute([
+            ':id' => $id
+        ]);
 
         return $stmt->rowCount() > 0;
     }
@@ -147,15 +193,22 @@ class Venda
     /**
      * Atualiza uma venda existente.
      */
-    public function atualizar(int $id, string $data, int $quantidade): bool
-    {
+    public function atualizar(
+        int $id,
+        string $data,
+        int $quantidade
+    ): bool {
+
         if ($quantidade < 1) {
-            throw new InvalidArgumentException('A quantidade deve ser maior que zero.');
+            throw new InvalidArgumentException(
+                'A quantidade deve ser maior que zero.'
+            );
         }
 
         $sql = "
             UPDATE {$this->table}
-            SET data = :data,
+            SET
+                data = :data,
                 quantidade = :quantidade
             WHERE id = :id
         ";
