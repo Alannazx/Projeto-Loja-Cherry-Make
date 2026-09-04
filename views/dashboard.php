@@ -1848,7 +1848,7 @@ body{
         <div class="middle-box">
 
             <div class="sellers-title">
-                Nossas Vendedoras ♡
+                Nossas Funcionárias ♡
             </div>
 
 
@@ -1867,7 +1867,7 @@ body{
                     </div>
 
                     <div class="seller-name">
-                        Letícia
+                     Lara
                     </div>
 
                     <div class="seller-role">
@@ -1889,11 +1889,11 @@ body{
                     </div>
 
                     <div class="seller-name">
-                       Alanna
+                  Bruna
                     </div>
 
                     <div class="seller-role">
-                        Vendedora
+                        Administradora
                     </div>
 
                 </div>
