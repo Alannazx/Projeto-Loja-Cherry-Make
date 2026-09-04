@@ -12,32 +12,19 @@ $perfil = $_SESSION['perfil'] ?? 'vendedor';
  */
 $vendas = $vendas ?? [];
 
-$mesAtual = date('Y-m');
+// O controller deve enviar TODOS os registros de vendas.
+// Ordena do registro mais recente para o mais antigo.
+$vendasTodosMeses = $vendas;
 
-$vendasDoMes = array_values(array_filter($vendas, function ($venda) use ($mesAtual) {
-    return isset($venda['data']) && substr($venda['data'], 0, 7) === $mesAtual;
-}));
+usort($vendasTodosMeses, function ($a, $b) {
+    return strcmp($b['data'] ?? '', $a['data'] ?? '');
+});
 
-$totalVendas = array_sum(array_map(function ($venda) {
+// Soma todas as vendas de todos os meses.
+$totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
     return (int)($venda['quantidade'] ?? 0);
-}, $vendasDoMes));
+}, $vendasTodosMeses)));
 
-$meses = [
-    'January' => 'Janeiro',
-    'February' => 'Fevereiro',
-    'March' => 'Março',
-    'April' => 'Abril',
-    'May' => 'Maio',
-    'June' => 'Junho',
-    'July' => 'Julho',
-    'August' => 'Agosto',
-    'September' => 'Setembro',
-    'October' => 'Outubro',
-    'November' => 'Novembro',
-    'December' => 'Dezembro'
-];
-
-$mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
 ?>
 
 <!doctype html>
@@ -54,7 +41,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
         href="/lojacosmeticos_alalet/public/assets/img/cherry.png"
     >
 
-    <title>Vendas do Mês - Cherry Make</title>
+    <title>Vendas - Cherry Make</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -297,7 +284,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
         }
 
         .decoracao {
-            width: 390px;
+            width: 547px;
 
             margin-top: 14px;
 
@@ -835,7 +822,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
                 </div>
 
                 <p>
-                    Registre suas vendas do mês abaixo.
+                    Registre suas vendas abaixo.
                 </p>
 
                 <div class="decoracao"></div>
@@ -873,22 +860,6 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
 
             </div>
 
-
-            <div class="resumo-card">
-
-                <div class="resumo-label">
-                    Vendas Totais
-                </div>
-
-                <div class="resumo-value">
-                    <?php echo $totalVendas; ?>
-                </div>
-
-                <div class="resumo-sub">
-                    <?php echo $mesNome; ?>
-                </div>
-
-            </div>
 
         </section>
 
@@ -986,7 +957,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
 
                 <span>▣</span>
 
-                Vendas do Mês
+                Todos os Registros de Vendas
 
             </div>
 
@@ -1018,7 +989,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
 
                     <tbody>
 
-                    <?php if (empty($vendasDoMes)): ?>
+                    <?php if (empty($vendasTodosMeses)): ?>
 
                         <tr>
 
@@ -1028,8 +999,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
 
                                     ♡<br>
 
-                                    Nenhuma venda registrada
-                                    neste mês.
+                                    Nenhuma venda registrada ainda.
 
                                 </div>
 
@@ -1039,7 +1009,7 @@ $mesNome = ($meses[date('F')] ?? date('F')) . '/' . date('Y');
 
                     <?php else: ?>
 
-                        <?php foreach ($vendasDoMes as $venda): ?>
+                        <?php foreach ($vendasTodosMeses as $venda): ?>
 
                             <tr>
 
