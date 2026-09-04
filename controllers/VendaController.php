@@ -9,8 +9,6 @@ class VendaController
 
     public function __construct()
     {
-        // O index.php já carrega config/db.php e inicia a sessão.
-        // Aqui usamos a mesma conexão do projeto.
         $pdo = Database::getConnection();
 
         $this->venda = new Venda($pdo);
@@ -20,11 +18,11 @@ class VendaController
     {
         $this->verificarLogin();
 
-        $mesAtual = date('Y-m');
+        // Busca TODAS as vendas de todos os meses
+        $vendas = $this->venda->listarTodos();
 
-        $vendas = $this->venda->listarPorMes($mesAtual);
-        $totalVendas = $this->venda->totalPorMes($mesAtual);
-        $totalGeral = $this->venda->total();
+        // Soma TODAS as vendas registradas no banco
+        $totalVendas = $this->venda->total();
 
         require __DIR__ . '/../views/vendas.php';
     }
@@ -38,6 +36,7 @@ class VendaController
         }
 
         $data = trim($_POST['data'] ?? '');
+
         $quantidade = filter_var(
             $_POST['quantidade'] ?? null,
             FILTER_VALIDATE_INT
@@ -57,11 +56,25 @@ class VendaController
         }
 
         try {
+
             $this->venda->criar($data, $quantidade);
-            $this->mensagem('success', 'Venda registrada com sucesso!');
+
+            $this->mensagem(
+                'success',
+                'Venda registrada com sucesso!'
+            );
+
         } catch (Throwable $e) {
-            error_log('Erro ao registrar venda: ' . $e->getMessage());
-            $this->mensagem('error', 'Não foi possível registrar a venda.');
+
+            error_log(
+                'Erro ao registrar venda: ' .
+                $e->getMessage()
+            );
+
+            $this->mensagem(
+                'error',
+                'Não foi possível registrar a venda.'
+            );
         }
 
         $this->redirecionar();
@@ -75,22 +88,48 @@ class VendaController
             $this->redirecionar();
         }
 
-        $id = filter_var($_POST['id'] ?? null, FILTER_VALIDATE_INT);
+        $id = filter_var(
+            $_POST['id'] ?? null,
+            FILTER_VALIDATE_INT
+        );
 
         if ($id === false || $id < 1) {
-            $this->mensagem('error', 'Registro de venda inválido.');
+            $this->mensagem(
+                'error',
+                'Registro de venda inválido.'
+            );
+
             $this->redirecionar();
         }
 
         try {
+
             if ($this->venda->excluir($id)) {
-                $this->mensagem('success', 'Registro excluído com sucesso!');
+
+                $this->mensagem(
+                    'success',
+                    'Registro excluído com sucesso!'
+                );
+
             } else {
-                $this->mensagem('error', 'Venda não encontrada.');
+
+                $this->mensagem(
+                    'error',
+                    'Venda não encontrada.'
+                );
             }
+
         } catch (Throwable $e) {
-            error_log('Erro ao excluir venda: ' . $e->getMessage());
-            $this->mensagem('error', 'Não foi possível excluir a venda.');
+
+            error_log(
+                'Erro ao excluir venda: ' .
+                $e->getMessage()
+            );
+
+            $this->mensagem(
+                'error',
+                'Não foi possível excluir a venda.'
+            );
         }
 
         $this->redirecionar();
@@ -104,25 +143,57 @@ class VendaController
             $this->redirecionar();
         }
 
-        $id = filter_var($_POST['id'] ?? null, FILTER_VALIDATE_INT);
+        $id = filter_var(
+            $_POST['id'] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
         $data = trim($_POST['data'] ?? '');
+
         $quantidade = filter_var(
             $_POST['quantidade'] ?? null,
             FILTER_VALIDATE_INT
         );
 
-        if ($id === false || $id < 1 || !$this->dataValida($data) ||
-            $quantidade === false || $quantidade < 1) {
-            $this->mensagem('error', 'Dados da venda inválidos.');
+        if (
+            $id === false ||
+            $id < 1 ||
+            !$this->dataValida($data) ||
+            $quantidade === false ||
+            $quantidade < 1
+        ) {
+            $this->mensagem(
+                'error',
+                'Dados da venda inválidos.'
+            );
+
             $this->redirecionar();
         }
 
         try {
-            $this->venda->atualizar($id, $data, $quantidade);
-            $this->mensagem('success', 'Venda atualizada com sucesso!');
+
+            $this->venda->atualizar(
+                $id,
+                $data,
+                $quantidade
+            );
+
+            $this->mensagem(
+                'success',
+                'Venda atualizada com sucesso!'
+            );
+
         } catch (Throwable $e) {
-            error_log('Erro ao atualizar venda: ' . $e->getMessage());
-            $this->mensagem('error', 'Não foi possível atualizar a venda.');
+
+            error_log(
+                'Erro ao atualizar venda: ' .
+                $e->getMessage()
+            );
+
+            $this->mensagem(
+                'error',
+                'Não foi possível atualizar a venda.'
+            );
         }
 
         $this->redirecionar();
@@ -140,13 +211,19 @@ class VendaController
 
     private function dataValida(string $data): bool
     {
-        $date = DateTime::createFromFormat('Y-m-d', $data);
+        $date = DateTime::createFromFormat(
+            'Y-m-d',
+            $data
+        );
 
-        return $date !== false && $date->format('Y-m-d') === $data;
+        return $date !== false &&
+               $date->format('Y-m-d') === $data;
     }
 
-    private function mensagem(string $tipo, string $texto): void
-    {
+    private function mensagem(
+        string $tipo,
+        string $texto
+    ): void {
         $_SESSION['flash'] = [
             'tipo' => $tipo,
             'texto' => $texto
