@@ -14,19 +14,31 @@ class VendaController
         $this->venda = new Venda($pdo);
     }
 
+    /**
+     * Página de vendas.
+     */
     public function index(): void
     {
         $this->verificarLogin();
 
-        // Busca TODAS as vendas de todos os meses
+        // Todas as vendas de todos os meses
         $vendas = $this->venda->listarTodos();
 
-        // Soma TODAS as vendas registradas no banco
+        // Total geral
         $totalVendas = $this->venda->total();
+
+        // Produtos cadastrados
+        $produtos = $this->venda->listarProdutos();
+
+        // Vendedores cadastrados
+        $vendedores = $this->venda->listarVendedores();
 
         require __DIR__ . '/../views/vendas.php';
     }
 
+    /**
+     * Registra uma nova venda.
+     */
     public function store(): void
     {
         $this->verificarLogin();
@@ -42,8 +54,22 @@ class VendaController
             FILTER_VALIDATE_INT
         );
 
+        $produtoId = filter_var(
+            $_POST['produto_id'] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
+        $vendedorId = filter_var(
+            $_POST['vendedor_id'] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
         if (!$this->dataValida($data)) {
-            $this->mensagem('error', 'Informe uma data válida.');
+            $this->mensagem(
+                'error',
+                'Informe uma data válida.'
+            );
+
             $this->redirecionar();
         }
 
@@ -52,12 +78,47 @@ class VendaController
                 'error',
                 'A quantidade de vendas deve ser maior que zero.'
             );
+
+            $this->redirecionar();
+        }
+
+        if ($produtoId === false || $produtoId < 1) {
+            $this->mensagem(
+                'error',
+                'Selecione um produto.'
+            );
+
+            $this->redirecionar();
+        }
+
+        if ($vendedorId === false || $vendedorId < 1) {
+            $this->mensagem(
+                'error',
+                'Selecione um vendedor.'
+            );
+
             $this->redirecionar();
         }
 
         try {
 
-            $this->venda->criar($data, $quantidade);
+            /*
+             * O horário NÃO é enviado aqui.
+             *
+             * O campo created_at do banco possui:
+             *
+             * DEFAULT CURRENT_TIMESTAMP
+             *
+             * Portanto o banco registra automaticamente
+             * o momento em que a venda foi cadastrada.
+             */
+
+            $this->venda->criar(
+                $data,
+                $quantidade,
+                $produtoId,
+                $vendedorId
+            );
 
             $this->mensagem(
                 'success',
@@ -80,6 +141,9 @@ class VendaController
         $this->redirecionar();
     }
 
+    /**
+     * Exclui uma venda.
+     */
     public function delete(): void
     {
         $this->verificarLogin();
@@ -135,6 +199,9 @@ class VendaController
         $this->redirecionar();
     }
 
+    /**
+     * Atualiza uma venda.
+     */
     public function update(): void
     {
         $this->verificarLogin();
@@ -155,12 +222,26 @@ class VendaController
             FILTER_VALIDATE_INT
         );
 
+        $produtoId = filter_var(
+            $_POST['produto_id'] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
+        $vendedorId = filter_var(
+            $_POST['vendedor_id'] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
         if (
             $id === false ||
             $id < 1 ||
             !$this->dataValida($data) ||
             $quantidade === false ||
-            $quantidade < 1
+            $quantidade < 1 ||
+            $produtoId === false ||
+            $produtoId < 1 ||
+            $vendedorId === false ||
+            $vendedorId < 1
         ) {
             $this->mensagem(
                 'error',
@@ -175,7 +256,9 @@ class VendaController
             $this->venda->atualizar(
                 $id,
                 $data,
-                $quantidade
+                $quantidade,
+                $produtoId,
+                $vendedorId
             );
 
             $this->mensagem(
@@ -199,16 +282,24 @@ class VendaController
         $this->redirecionar();
     }
 
+    /**
+     * Verifica se o usuário está logado.
+     */
     private function verificarLogin(): void
     {
         if (empty($_SESSION['nome'])) {
+
             header(
                 'Location: /lojacosmeticos_alalet/index.php?controller=auth&action=form'
             );
+
             exit;
         }
     }
 
+    /**
+     * Valida a data.
+     */
     private function dataValida(string $data): bool
     {
         $date = DateTime::createFromFormat(
@@ -220,21 +311,29 @@ class VendaController
                $date->format('Y-m-d') === $data;
     }
 
+    /**
+     * Mensagem flash.
+     */
     private function mensagem(
         string $tipo,
         string $texto
     ): void {
+
         $_SESSION['flash'] = [
             'tipo' => $tipo,
             'texto' => $texto
         ];
     }
 
+    /**
+     * Redireciona para a página de vendas.
+     */
     private function redirecionar(): void
     {
         header(
             'Location: /lojacosmeticos_alalet/index.php?controller=venda&action=index'
         );
+
         exit;
     }
 }
