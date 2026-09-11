@@ -1,29 +1,48 @@
 <?php
+
 $nome = $_SESSION['nome'] ?? 'Usuário';
 $perfil = $_SESSION['perfil'] ?? 'vendedor';
 
-/*
- * O controller pode enviar as vendas em $vendas.
- * Estrutura esperada de cada registro:
- * [
- *   'data' => '2026-08-21',
- *   'quantidade' => 5
- * ]
- */
 $vendas = $vendas ?? [];
+$produtos = $produtos ?? [];
+$vendedores = $vendedores ?? [];
 
-// O controller deve enviar TODOS os registros de vendas.
-// Ordena do registro mais recente para o mais antigo.
+/*
+ * O controller envia todas as vendas.
+ * Cada venda deve possuir:
+ *
+ * id
+ * data
+ * quantidade
+ * created_at
+ * produto_id
+ * produto_nome
+ * vendedor_id
+ * vendedor_nome
+ */
+
+// Todas as vendas
 $vendasTodosMeses = $vendas;
 
+/*
+ * Ordena da venda mais recente para a mais antiga.
+ */
 usort($vendasTodosMeses, function ($a, $b) {
-    return strcmp($b['data'] ?? '', $a['data'] ?? '');
+
+    $dataA = ($a['data'] ?? '') . ' ' . ($a['created_at'] ?? '');
+    $dataB = ($b['data'] ?? '') . ' ' . ($b['created_at'] ?? '');
+
+    return strcmp($dataB, $dataA);
 });
 
-// Soma todas as vendas de todos os meses.
-$totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
-    return (int)($venda['quantidade'] ?? 0);
-}, $vendasTodosMeses)));
+/*
+ * Soma todas as vendas.
+ */
+$totalVendas = (int)($totalVendas ?? array_sum(
+    array_map(function ($venda) {
+        return (int)($venda['quantidade'] ?? 0);
+    }, $vendasTodosMeses)
+));
 
 ?>
 
@@ -329,7 +348,7 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
         .resumo {
             display: grid;
 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
 
             gap: 18px;
 
@@ -365,12 +384,6 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                 );
         }
 
-        .resumo-card:last-child {
-            color: var(--vinho);
-
-            background: #FFD8E3;
-        }
-
         .resumo-card:after {
             content: "♡";
 
@@ -384,11 +397,6 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
             color:
                 rgba(255, 255, 255, .45);
-        }
-
-        .resumo-card:last-child:after {
-            color:
-                rgba(139, 0, 31, .22);
         }
 
         .resumo-label {
@@ -461,11 +469,14 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
             font-size: 21px;
         }
 
+        /*
+         * FORMULÁRIO
+         */
         .form {
             display: grid;
 
             grid-template-columns:
-                1fr 1fr 150px auto;
+                1fr 1fr 150px 120px auto;
 
             gap: 15px;
 
@@ -484,7 +495,8 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
             font-weight: 600;
         }
 
-        .field input {
+        .field input,
+        .field select {
             width: 100%;
 
             height: 45px;
@@ -508,7 +520,12 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                 sans-serif;
         }
 
-        .field input:focus {
+        .field select {
+            cursor: pointer;
+        }
+
+        .field input:focus,
+        .field select:focus {
             border-color: var(--rosa-medio);
 
             box-shadow:
@@ -570,6 +587,9 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                 var(--rosa-claro);
         }
 
+        /*
+         * TABELA
+         */
         .table-wrap {
             overflow: auto;
 
@@ -584,7 +604,7 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
             border-collapse: collapse;
 
-            min-width: 550px;
+            min-width: 850px;
         }
 
         th,
@@ -621,6 +641,24 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
             font-weight: 800;
         }
 
+        .horario {
+            color: var(--muted);
+
+            font-size: 11px;
+
+            white-space: nowrap;
+        }
+
+        .produto {
+            font-weight: 600;
+
+            color: var(--texto);
+        }
+
+        .vendedor {
+            color: var(--texto);
+        }
+
         .delete {
             min-width: 82px;
             height: 32px;
@@ -634,7 +672,11 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
             cursor: pointer;
 
-            font-family: "Poppins", Arial, sans-serif;
+            font-family:
+                "Poppins",
+                Arial,
+                sans-serif;
+
             font-size: 10px;
             font-weight: 600;
 
@@ -643,8 +685,12 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
         .delete:hover {
             background: #690016;
+
             transform: translateY(-1px);
-            box-shadow: 0 5px 12px rgba(139, 0, 31, .18);
+
+            box-shadow:
+                0 5px 12px
+                rgba(139, 0, 31, .18);
         }
 
         .empty {
@@ -672,6 +718,19 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
             font-style: italic;
 
             font-size: 16px;
+        }
+
+        @media (max-width: 1100px) {
+
+            .form {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .btn-add,
+            .btn-clear {
+                width: 100%;
+            }
         }
 
         @media (max-width: 900px) {
@@ -860,9 +919,10 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
             </div>
 
-
         </section>
 
+
+        <!-- REGISTRAR VENDA -->
 
         <section class="box">
 
@@ -882,6 +942,82 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                 id="formVenda"
             >
 
+                <!-- VENDEDOR -->
+
+                <div class="field">
+
+                    <label for="vendedor_id">
+                        Vendedor
+                    </label>
+
+                    <select
+                        id="vendedor_id"
+                        name="vendedor_id"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione o vendedor
+                        </option>
+
+                        <?php foreach ($vendedores as $vendedor): ?>
+
+                            <option
+                                value="<?php echo (int)$vendedor['id']; ?>"
+                            >
+                                <?php
+                                echo htmlspecialchars(
+                                    $vendedor['nome']
+                                );
+                                ?>
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRODUTO -->
+
+                <div class="field">
+
+                    <label for="produto_id">
+                        Produto
+                    </label>
+
+                    <select
+                        id="produto_id"
+                        name="produto_id"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione o produto
+                        </option>
+
+                        <?php foreach ($produtos as $produto): ?>
+
+                            <option
+                                value="<?php echo (int)$produto['id']; ?>"
+                            >
+                                <?php
+                                echo htmlspecialchars(
+                                    $produto['nome']
+                                );
+                                ?>
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATA -->
+
                 <div class="field">
 
                     <label for="data">
@@ -899,10 +1035,12 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                 </div>
 
 
+                <!-- QUANTIDADE -->
+
                 <div class="field">
 
                     <label for="quantidade">
-                        Quantidade de Vendas
+                        Quantidade
                     </label>
 
                     <input
@@ -917,18 +1055,7 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                 </div>
 
 
-                <!--
-                    BOTÃO LIMPAR CORRIGIDO
-
-                    Antes:
-                    type="reset"
-
-                    Agora:
-                    type="button"
-
-                    Assim podemos limpar os campos
-                    completamente através do JavaScript.
-                -->
+                <!-- LIMPAR -->
 
                 <button
                     type="button"
@@ -938,6 +1065,8 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                     Limpar
                 </button>
 
+
+                <!-- ADICIONAR -->
 
                 <button
                     type="submit"
@@ -950,6 +1079,8 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
         </section>
 
+
+        <!-- REGISTROS -->
 
         <section class="box">
 
@@ -975,7 +1106,19 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                             </th>
 
                             <th>
-                                Quantidade de Vendas
+                                Horário
+                            </th>
+
+                            <th>
+                                Vendedor
+                            </th>
+
+                            <th>
+                                Produto
+                            </th>
+
+                            <th>
+                                Quantidade
                             </th>
 
                             <th>
@@ -993,7 +1136,7 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
                         <tr>
 
-                            <td colspan="3">
+                            <td colspan="6">
 
                                 <div class="empty">
 
@@ -1013,6 +1156,8 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
                             <tr>
 
+                                <!-- DATA -->
+
                                 <td>
 
                                     <?php
@@ -1027,30 +1172,91 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                                 </td>
 
 
-                                <td class="qtd">
+                                <!-- HORÁRIO -->
+
+                                <td class="horario">
 
                                     <?php
 
-                                    echo (int)(
-                                        $venda['quantidade'] ?? 0
-                                    );
+                                    if (!empty($venda['created_at'])) {
 
-                                    ?>
+                                        echo date(
+                                            'H:i:s',
+                                            strtotime(
+                                                $venda['created_at']
+                                            )
+                                        );
 
-                                    <?php
+                                    } else {
 
-                                    echo (
-                                        (int)(
-                                            $venda['quantidade'] ?? 0
-                                        ) === 1
-                                    )
-                                        ? 'venda'
-                                        : 'vendas';
+                                        echo '—';
+
+                                    }
 
                                     ?>
 
                                 </td>
 
+
+                                <!-- VENDEDOR -->
+
+                                <td class="vendedor">
+
+                                    <?php
+
+                                    echo htmlspecialchars(
+                                        $venda['vendedor_nome']
+                                        ?? 'Não informado'
+                                    );
+
+                                    ?>
+
+                                </td>
+
+
+                                <!-- PRODUTO -->
+
+                                <td class="produto">
+
+                                    <?php
+
+                                    echo htmlspecialchars(
+                                        $venda['produto_nome']
+                                        ?? 'Não informado'
+                                    );
+
+                                    ?>
+
+                                </td>
+
+
+                                <!-- QUANTIDADE -->
+
+                                <td class="qtd">
+
+                                    <?php
+
+                                    $quantidade = (int)(
+                                        $venda['quantidade']
+                                        ?? 0
+                                    );
+
+                                    echo $quantidade;
+
+                                    ?>
+
+                                    <?php
+
+                                    echo $quantidade === 1
+                                        ? ' venda'
+                                        : ' vendas';
+
+                                    ?>
+
+                                </td>
+
+
+                                <!-- EXCLUIR -->
 
                                 <td>
 
@@ -1067,7 +1273,6 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
                                                 name="id"
                                                 value="<?php echo (int)$venda['id']; ?>"
                                             >
-
 
                                             <button
                                                 class="delete"
@@ -1119,12 +1324,6 @@ $totalVendas = (int)($totalVendas ?? array_sum(array_map(function ($venda) {
 
 <script>
 
-/*
- * Limpa completamente o formulário de vendas.
- *
- * O botão não usa mais type="reset", porque reset
- * faria os campos voltarem aos valores iniciais.
- */
 function limparFormulario() {
 
     const data =
@@ -1133,17 +1332,43 @@ function limparFormulario() {
     const quantidade =
         document.getElementById('quantidade');
 
+    const produto =
+        document.getElementById('produto_id');
 
-    // Limpa a data
-    data.value = '';
+    const vendedor =
+        document.getElementById('vendedor_id');
 
 
-    // Limpa a quantidade
+    // Limpa vendedor
+    vendedor.value = '';
+
+
+    // Limpa produto
+    produto.value = '';
+
+
+    // Limpa quantidade
     quantidade.value = '';
 
 
-    // Coloca o cursor novamente no campo de data
-    data.focus();
+    // Coloca a data atual novamente
+    const hoje = new Date();
+
+    const ano = hoje.getFullYear();
+
+    const mes = String(
+        hoje.getMonth() + 1
+    ).padStart(2, '0');
+
+    const dia = String(
+        hoje.getDate()
+    ).padStart(2, '0');
+
+    data.value =
+        `${ano}-${mes}-${dia}`;
+
+
+    vendedor.focus();
 }
 
 </script>
