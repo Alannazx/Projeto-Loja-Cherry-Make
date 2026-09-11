@@ -1860,8 +1860,8 @@ body{
                     <div class="seller-photo">
 
                         <img
-                            src="public/assets/img/let.png"
-                            alt="Letícia"
+                            src="public/assets/img/boneca2.png"
+                            alt="Lara"
                         >
 
                     </div>
@@ -1882,8 +1882,8 @@ body{
                     <div class="seller-photo">
 
                         <img
-                            src="public/assets/img/lana.png"
-                            alt="Alanna"
+                            src="public/assets/img/boneca1.png"
+                            alt="Bruna"
                         >
 
                     </div>
