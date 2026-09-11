@@ -1,4 +1,5 @@
 <?php
+
 class Venda
 {
     private PDO $db;
@@ -21,10 +22,15 @@ class Venda
 
     /**
      * Registra uma nova venda.
+     *
+     * O created_at NÃO é enviado.
+     * O banco registra automaticamente a data e horário.
      */
     public function criar(
         string $data,
-        int $quantidade = 1
+        int $quantidade,
+        int $produtoId,
+        int $vendedorId
     ): bool {
 
         if ($quantidade < 1) {
@@ -33,34 +39,78 @@ class Venda
             );
         }
 
+        if ($produtoId < 1) {
+            throw new InvalidArgumentException(
+                'Produto inválido.'
+            );
+        }
+
+        if ($vendedorId < 1) {
+            throw new InvalidArgumentException(
+                'Vendedor inválido.'
+            );
+        }
+
         $sql = "
-            INSERT INTO {$this->table} (data, quantidade)
-            VALUES (:data, :quantidade)
+            INSERT INTO {$this->table}
+            (
+                data,
+                quantidade,
+                produto_id,
+                vendedor_id
+            )
+            VALUES
+            (
+                :data,
+                :quantidade,
+                :produto_id,
+                :vendedor_id
+            )
         ";
 
         $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
             ':data' => $data,
-            ':quantidade' => $quantidade
+            ':quantidade' => $quantidade,
+            ':produto_id' => $produtoId,
+            ':vendedor_id' => $vendedorId
         ]);
     }
 
     /**
-     * Retorna TODAS as vendas de todos os meses.
+     * Retorna todas as vendas.
      *
-     * As vendas mais recentes aparecem primeiro.
+     * Também busca o nome do produto
+     * e o nome do vendedor.
      */
     public function listarTodos(): array
     {
         $sql = "
             SELECT
-                id,
-                data,
-                quantidade,
-                created_at
-            FROM {$this->table}
-            ORDER BY data DESC, id DESC
+                v.id,
+                v.data,
+                v.quantidade,
+                v.created_at,
+
+                v.produto_id,
+                p.nome AS produto_nome,
+
+                v.vendedor_id,
+                u.nome AS vendedor_nome
+
+            FROM {$this->table} v
+
+            LEFT JOIN produto p
+                ON p.id = v.produto_id
+
+            LEFT JOIN usuario u
+                ON u.id = v.vendedor_id
+
+            ORDER BY
+                v.data DESC,
+                v.created_at DESC,
+                v.id DESC
         ";
 
         $stmt = $this->db->query($sql);
@@ -69,9 +119,7 @@ class Venda
     }
 
     /**
-     * Retorna todas as vendas de um determinado mês.
-     *
-     * $mes deve estar no formato YYYY-MM.
+     * Retorna todas as vendas de determinado mês.
      */
     public function listarPorMes(string $mes): array
     {
@@ -83,13 +131,31 @@ class Venda
 
         $sql = "
             SELECT
-                id,
-                data,
-                quantidade,
-                created_at
-            FROM {$this->table}
-            WHERE DATE_FORMAT(data, '%Y-%m') = :mes
-            ORDER BY data DESC, id DESC
+                v.id,
+                v.data,
+                v.quantidade,
+                v.created_at,
+
+                v.produto_id,
+                p.nome AS produto_nome,
+
+                v.vendedor_id,
+                u.nome AS vendedor_nome
+
+            FROM {$this->table} v
+
+            LEFT JOIN produto p
+                ON p.id = v.produto_id
+
+            LEFT JOIN usuario u
+                ON u.id = v.vendedor_id
+
+            WHERE DATE_FORMAT(v.data, '%Y-%m') = :mes
+
+            ORDER BY
+                v.data DESC,
+                v.created_at DESC,
+                v.id DESC
         ";
 
         $stmt = $this->db->prepare($sql);
@@ -102,7 +168,7 @@ class Venda
     }
 
     /**
-     * Retorna a quantidade total de vendas de um mês.
+     * Total de vendas de determinado mês.
      */
     public function totalPorMes(string $mes): int
     {
@@ -128,9 +194,7 @@ class Venda
     }
 
     /**
-     * Retorna o total geral de vendas.
-     *
-     * Soma as vendas de TODOS os meses.
+     * Total geral de vendas.
      */
     public function total(): int
     {
@@ -151,12 +215,27 @@ class Venda
     {
         $sql = "
             SELECT
-                id,
-                data,
-                quantidade,
-                created_at
-            FROM {$this->table}
-            WHERE id = :id
+                v.id,
+                v.data,
+                v.quantidade,
+                v.created_at,
+
+                v.produto_id,
+                p.nome AS produto_nome,
+
+                v.vendedor_id,
+                u.nome AS vendedor_nome
+
+            FROM {$this->table} v
+
+            LEFT JOIN produto p
+                ON p.id = v.produto_id
+
+            LEFT JOIN usuario u
+                ON u.id = v.vendedor_id
+
+            WHERE v.id = :id
+
             LIMIT 1
         ";
 
@@ -191,12 +270,14 @@ class Venda
     }
 
     /**
-     * Atualiza uma venda existente.
+     * Atualiza uma venda.
      */
     public function atualizar(
         int $id,
         string $data,
-        int $quantidade
+        int $quantidade,
+        int $produtoId,
+        int $vendedorId
     ): bool {
 
         if ($quantidade < 1) {
@@ -209,7 +290,9 @@ class Venda
             UPDATE {$this->table}
             SET
                 data = :data,
-                quantidade = :quantidade
+                quantidade = :quantidade,
+                produto_id = :produto_id,
+                vendedor_id = :vendedor_id
             WHERE id = :id
         ";
 
@@ -218,9 +301,48 @@ class Venda
         $stmt->execute([
             ':id' => $id,
             ':data' => $data,
-            ':quantidade' => $quantidade
+            ':quantidade' => $quantidade,
+            ':produto_id' => $produtoId,
+            ':vendedor_id' => $vendedorId
         ]);
 
         return $stmt->rowCount() > 0;
+    }
+
+    /**
+     * Lista os produtos cadastrados.
+     */
+    public function listarProdutos(): array
+    {
+        $sql = "
+            SELECT
+                id,
+                nome
+            FROM produto
+            WHERE ativo = 1
+            ORDER BY nome ASC
+        ";
+
+        return $this->db
+            ->query($sql)
+            ->fetchAll();
+    }
+
+    /**
+     * Lista os vendedores/usuários cadastrados.
+     */
+    public function listarVendedores(): array
+    {
+        $sql = "
+            SELECT
+                id,
+                nome
+            FROM usuario
+            ORDER BY nome ASC
+        ";
+
+        return $this->db
+            ->query($sql)
+            ->fetchAll();
     }
 }
