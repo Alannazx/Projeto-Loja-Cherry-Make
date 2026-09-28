@@ -286,9 +286,12 @@ $heroImagens = [
         ===================================================== */
 
         .header-search {
-            flex: 1 1 620px;
-            width: min(620px, 100%);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(620px, calc(100% - 520px));
             max-width: 620px;
+            min-width: 320px;
             height: 46px;
             display: flex;
             align-items: center;
@@ -347,6 +350,7 @@ $heroImagens = [
             padding: 9px 3.8%;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             background: #fff6f8;
             border-bottom: 1px solid #f3d6de;
@@ -951,7 +955,8 @@ $heroImagens = [
             }
 
             .header-search {
-                max-width: 520px;
+                width: min(520px, calc(100% - 440px));
+                min-width: 280px;
             }
 
             .product-grid {
@@ -962,6 +967,8 @@ $heroImagens = [
         @media(max-width:850px) {
 
             .header {height:auto;min-height:82px;padding:12px 5%;gap:10px;}
+            .header-search {position:relative;left:auto;transform:none;width:100%;min-width:0;max-width:none;order:3;}
+            .header {flex-wrap:wrap;}
 
             .site-brand-group {
                 min-width: 0;
@@ -975,7 +982,7 @@ $heroImagens = [
             .header-action.login { width:42px; padding:0; }
 
             .hero {height:300px;}
-            .categories-bar{min-height:64px;padding:9px 4%;}
+            .categories-bar{min-height:64px;padding:9px 4%;justify-content:center;}
             .category-item{min-width:108px;padding:0 16px;}
 
             .benefits {
@@ -1323,7 +1330,7 @@ $heroImagens = [
         >
 
             <h2 class="section-title">
-                TODOS OS PRODUTOS
+                Todos os Produtos ♥
             </h2>
 
 
