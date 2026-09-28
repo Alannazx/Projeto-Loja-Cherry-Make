@@ -2064,7 +2064,7 @@ body{
             <!-- FORNECEDOR -->
 
             <a
-                href="/lojacosmeticos_alalet/index.php?controller=fornecedor&action=index"
+                href="/lojacosmeticos_alalet/index.php?controller=variacao&action=index"
                 class="shortcut"
             >
 
@@ -2077,7 +2077,7 @@ body{
                 </div>
 
                 <div class="shortcut-text">
-                    Fornecedor
+                 Variação
                 </div>
 
                 <div class="shortcut-arrow">
