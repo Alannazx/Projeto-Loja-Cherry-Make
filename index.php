@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require_once __DIR__ . '/config/db.php';
@@ -19,36 +20,48 @@ switch ($controller) {
         break;
 
 
-    // CRUD PRODUTOS E VENDAS
+    // CRUD PRODUTOS
     case 'produto':
         require_once __DIR__ . '/controllers/ProdutoController.php';
         $c = new ProdutoController();
         break;
 
 
+    // ENTRADAS
     case 'entrada':
         require_once __DIR__ . '/controllers/Entrada_Controller.php';
         $c = new EntradaController();
         break;
 
 
+    // VENDAS
     case 'venda':
         require_once __DIR__ . '/controllers/VendaController.php';
         $c = new VendaController();
         break;
 
 
+    // RELATÓRIOS
     case 'relatorio':
         require_once __DIR__ . '/controllers/RelatorioController.php';
         $c = new RelatorioController();
         break;
 
 
-    // CRUD USUÁRIO / VENDEDOR
+    // USUÁRIO / VENDEDOR
     case 'usuario':
         require_once __DIR__ . '/controllers/UsuarioController.php';
         $c = new UsuarioController();
         break;
+
+//RELATORIO
+case 'relatorio':
+
+    require_once __DIR__ . '/controllers/RelatorioController.php';
+
+    $c = new RelatorioController();
+
+    break;
 
 
     // SITE OFICIAL
@@ -58,17 +71,54 @@ switch ($controller) {
         break;
 
 
+    // CATEGORIAS
+    case 'categoria':
+        require_once __DIR__ . '/controllers/CategoriaController.php';
+        $c = new CategoriaController();
+        break;
+
+        //FORNECEDOR
+        case 'fornecedor':
+
+            require_once 'controllers/FornecedorController.php';
+        
+            $c = new FornecedorController();
+        
+            switch ($action) {
+        
+                case 'index':
+                    $c->index();
+                    break;
+        
+                case 'store':
+                    $c->store();
+                    break;
+        
+                case 'delete':
+                    $c->delete();
+                    break;
+        
+                default:
+                    $c->index();
+                    break;
+            }
+        
+            break;
+
+
     // Caminho padrão caso o controller não exista
     default:
         die("Controller inválido.");
 }
 
 
-// Executar ação
+// Verificar se a ação existe
 if (!method_exists($c, $action)) {
     die("Ação inválida.");
 }
 
 
+// Executar ação UMA ÚNICA VEZ
 $c->$action();
+
 ?>
