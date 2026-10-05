@@ -29,7 +29,7 @@ switch ($controller) {
 
     // ENTRADAS
     case 'entrada':
-        require_once __DIR__ . '/controllers/Entrada_Controller.php';
+        require_once __DIR__ . '/controllers/EntradaController.php';
         $c = new EntradaController();
         break;
 
@@ -54,15 +54,6 @@ switch ($controller) {
         $c = new UsuarioController();
         break;
 
-//RELATORIO
-case 'relatorio':
-
-    require_once __DIR__ . '/controllers/RelatorioController.php';
-
-    $c = new RelatorioController();
-
-    break;
-
 
     // SITE OFICIAL
     case 'site':
@@ -76,6 +67,7 @@ case 'relatorio':
         require_once __DIR__ . '/controllers/CategoriaController.php';
         $c = new CategoriaController();
         break;
+
 
         //FORNECEDOR
         case 'fornecedor':
@@ -104,6 +96,41 @@ case 'relatorio':
             }
         
             break;
+
+ // CLIENTE
+case 'cliente':
+    require_once __DIR__ . '/controllers/ClienteController.php';
+    $c = new ClienteController();
+    break;
+
+//CHECKOUT
+case 'checkout':
+
+    require_once __DIR__ . '/models/Checkout.php';
+    require_once __DIR__ . '/controllers/CheckoutController.php';
+
+    $checkoutController =
+        new CheckoutController();
+
+    $action =
+        $_GET['action'] ?? 'index';
+
+
+    if (method_exists(
+        $checkoutController,
+        $action
+    )) {
+
+        $checkoutController->$action();
+
+    } else {
+
+        $checkoutController->index();
+
+    }
+
+    break;
+
 
 
     // Caminho padrão caso o controller não exista
