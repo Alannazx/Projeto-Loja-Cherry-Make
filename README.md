@@ -2,7 +2,7 @@ Loja de Maquiagem Cherry Make- Projeto final 3º ano Informática Manhã
 
  🍒 Cherry Make
 
-Sistema web desenvolvido para a **Cherry Make**, uma loja de cosméticos e maquiagem de marca própria.
+Sistema web desenvolvido para a **Cherry Make**, uma loja de maquiagem de marca própria.
 
  📌 Sobre o Projeto
 
