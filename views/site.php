@@ -15,27 +15,48 @@ $produtos = $produtos ?? [];
 $categorias = $categorias ?? [];
 
 $imagensProdutos = [
+    'Base Matte Líquida - Skins' => 'public/assets/img/baseliquida.png',
     'Paleta de Sombras - Cherry Blossom' => 'public/assets/img/paleta.png',
     'Pó Translúcido Matte - Cloud Touch' => 'public/assets/img/po.png',
-    'Lápis de olho - Berry Eye' => 'public/assets/img/lapis.png',
-    'Máscara de Cílios - Lash Drama' => 'public/assets/img/rimel.png',
-    'Base Matte Líquida - Skins' => 'public/assets/img/baseliquida.png',
-    'Spray Fixador de Maquiagem - Super Fix' => 'public/assets/img/sprayfix.png',
-    'Batom Matte - Ruby Flame' => 'public/assets/img/batomred.png',
-    'Blush - Pinky Cheeks' => 'public/assets/img/blush.png',
     'Corretivo líquido - Flawless' => 'public/assets/img/corretivo.png',
-    'Gloss - Cherry Glow' => 'public/assets/img/gloss10.png',
-    'Sérum Primer Hidratante - Glass Skin' => 'public/assets/img/serum.png',
+    'Máscara de Cílios - Lash Drama' => 'public/assets/img/rimel.png',
+    'Batom Matte - Ruby Flame' => 'public/assets/img/batomred.png',
     'Esponja de Maquiagem - Red Blend' => 'public/assets/img/esponjinha.png',
-    'Gel de Sobrancelha - Beaty Brows' => 'public/assets/img/gelsobrancelha.png',
+    'Blush - Pinky Cheeks' => 'public/assets/img/blush.png',
     'Iluminador Prateado - Metalic Cherry' => 'public/assets/img/iluminador.png',
-    'Kit Pincéis - Beauty Brushes' => 'public/assets/img/kitpinceis.png',
-    'Necessaire - Beauty Case' => 'public/assets/img/bolsa.png',
-    'Faixa de cabelo - Sweet Band' => 'public/assets/img/faixa.png',
-    'Hidratante Labial - Lip Kiss' => 'public/assets/img/hidratantelabial.png',
+    'Gel de Sobrancelha - Beaty Brows' => 'public/assets/img/gelsobrancelha.png',
+    'Gloss - Cherry Glow' => 'public/assets/img/gloss10.png',
+    'Lápis de olho - Berry Eye' => 'public/assets/img/lapis.png',
+    'Spray Fixador de Maquiagem - Super Fix' => 'public/assets/img/sprayfix.png',
     'Cílios Postiços - Dream Lashes' => 'public/assets/img/cilios.png',
+    'Kit Pincéis - Beauty Brushes' => 'public/assets/img/kitpinceis.png',
+    'Hidratante Labial - Lip Kiss' => 'public/assets/img/hidratantelabial.png',
+    'Paleta 3 em 1 - Berry Dreams' => 'public/assets/img/paleta2.png',
+    'Necessaire - Beauty Case' => 'public/assets/img/bolsa.png',
+    'Blush - Rosé Kiss' => 'public/assets/img/blushliquido.png',
+    'Batom Líquido - Ruby' => 'public/assets/img/batomliquido.png',
+    'Curvex - Lash Curl' => 'public/assets/img/curvex.png',
+    'Delineador - Eye Crush' => 'public/assets/img/delineador.png',
+    'Espelho - Beauty Mirror' => 'public/assets/img/espelho.png',
+    'Faixa de cabelo - Sweet Band' => 'public/assets/img/faixa.png',
+    'Primer  - Velvet Blur' => 'public/assets/img/primercreme.png',
+    'Primer - Velvet Blur' => 'public/assets/img/primercreme.png',
+    'Gloss Rosa - Candy Gloss' => 'public/assets/img/glossrosa.png',
+    'Sérum Primer Hidratante  - Glass Skin' => 'public/assets/img/serum.png',
+    'Sérum Primer Hidratante - Glass Skin' => 'public/assets/img/serum.png',
+    'Gloss Vermelho - Love Potion' => 'public/assets/img/glossvermelho.png',
     'Cherry Mystery Box' => 'public/assets/img/cherrybox.png',
+    'Cola de Cílios - Super Glue' => 'public/assets/img/cola.png',
 ];
+
+// Normaliza espaços para que pequenos erros de digitação no banco não
+// façam vários produtos caírem na mesma imagem padrão.
+$imagensProdutosNormalizadas = [];
+foreach ($imagensProdutos as $nome => $caminho) {
+    $chave = mb_strtolower(preg_replace('/\s+/', ' ', trim($nome)), 'UTF-8');
+    $imagensProdutosNormalizadas[$chave] = $caminho;
+}
+
 
 $precosProdutos = [
     'Paleta de Sombras - Cherry Blossom' => '69,90',
@@ -1082,6 +1103,10 @@ $heroImagens = [
 
     </style>
 
+    <script>
+        window.imagensProdutosSite = <?php echo json_encode($imagensProdutos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
+    </script>
+
 </head>
 
 <body>
@@ -1119,7 +1144,7 @@ $heroImagens = [
         </form>
 
         <div class="header-actions">
-            <a class="header-action login" href="/lojacosmeticos_alalet/index.php?controller=cliente&action=login" title="Login">
+            <a class="header-action login" href="/lojacosmeticos_alalet/index.php?controller=cliente&action=logincliente" title="Login">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="12" cy="8" r="3.2"></circle>
                     <path d="M5.5 20c.7-3.5 2.9-5.2 6.5-5.2s5.8 1.7 6.5 5.2"></path>
@@ -1353,9 +1378,13 @@ $heroImagens = [
                         $categoriaIdProduto = (int)($produto['categoria_id'] ?? $produto['id_categoria'] ?? 0);
                         $categoriaNomeProduto = $produto['categoria_nome'] ?? $produto['categoria'] ?? '';
 
+                        $nomeNormalizado = mb_strtolower(
+                            preg_replace('/\s+/', ' ', trim((string)$nomeProduto)),
+                            'UTF-8'
+                        );
                         $imagemProduto = !empty($produto['imagem'])
                             ? $produto['imagem']
-                            : ($imagensProdutos[$nomeProduto] ?? 'public/assets/img/cherrybox.png');
+                            : ($imagensProdutosNormalizadas[$nomeNormalizado] ?? 'public/assets/img/cherry.png');
 
                         $precoProduto = $produto['preco']
                             ?? ($precosProdutos[$nomeProduto] ?? null);
@@ -1832,9 +1861,15 @@ $heroImagens = [
                     ? 'Em estoque: ' + quantidadeEstoque + ' unidade(s)'
                     : 'Produto sem estoque';
 
-                const imagemProduto =
-                    produto.imagem ||
-                    '/lojacosmeticos_alalet/public/assets/img/cherrybox.png';
+                const nomeImagemNormalizado = (produto.nome || '').trim().replace(/\s+/g, ' ').toLocaleLowerCase('pt-BR');
+                const mapaImagens = window.imagensProdutosSite || {};
+                const chaveImagem = Object.keys(mapaImagens).find(
+                    nome => nome.trim().replace(/\s+/g, ' ').toLocaleLowerCase('pt-BR') === nomeImagemNormalizado
+                );
+                const imagemMapeada = chaveImagem ? mapaImagens[chaveImagem] : 'public/assets/img/cherry.png';
+                const imagemProduto = produto.imagem
+                    ? (produto.imagem.startsWith('/') ? produto.imagem : '/lojacosmeticos_alalet/' + produto.imagem)
+                    : '/lojacosmeticos_alalet/' + imagemMapeada;
 
                 imagem.src = imagemProduto;
                 imagem.alt = produto.nome || 'Produto';
