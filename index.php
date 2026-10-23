@@ -103,6 +103,15 @@ case 'cliente':
     $c = new ClienteController();
     break;
 
+
+ // VARIAÇÃO
+ case 'variacao':
+    require_once __DIR__ . '/controllers/VariacaoController.php';
+    $c = new VariacaoController();
+    break;
+
+
+
 //CHECKOUT
 case 'checkout':
 
