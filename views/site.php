@@ -40,11 +40,9 @@ $imagensProdutos = [
     'Espelho - Beauty Mirror' => 'public/assets/img/espelho.png',
     'Faixa de cabelo - Sweet Band' => 'public/assets/img/faixa.png',
     'Primer  - Velvet Blur' => 'public/assets/img/primercreme.png',
-    'Primer - Velvet Blur' => 'public/assets/img/primercreme.png',
     'Gloss Rosa - Candy Gloss' => 'public/assets/img/glossrosa.png',
     'Sérum Primer Hidratante  - Glass Skin' => 'public/assets/img/serum.png',
-    'Sérum Primer Hidratante - Glass Skin' => 'public/assets/img/serum.png',
-    'Gloss Vermelho - Love Potion' => 'public/assets/img/glossvermelho.png',
+    'Gloss Vermelho - Love Potion' => 'public/assets/img/glosspotion.png',
     'Cherry Mystery Box' => 'public/assets/img/cherrybox.png',
     'Cola de Cílios - Super Glue' => 'public/assets/img/cola.png',
 ];
@@ -2269,4 +2267,4 @@ $heroImagens = [
 
 </body>
 
-</html> 
+</html>
