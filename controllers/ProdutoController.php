@@ -34,9 +34,6 @@ class ProdutoController
 
         $categoriaId = (int)($_POST['categoria_id'] ?? 0);
 
-        // NOVO: recebe o SKU informado no formulário
-        $sku = trim((string)($_POST['sku'] ?? ''));
-
         $nome = trim($_POST['nome'] ?? '');
 
         $marca = trim($_POST['marca'] ?? '');
@@ -91,11 +88,10 @@ class ProdutoController
 
         if ($id > 0) {
 
-            // Atualiza produto + SKU + estoque + preço
+            // Atualiza produto  + estoque + preço
             $produtoModel->atualizar(
                 $id,
                 $categoriaId,
-                $sku,
                 $nome,
                 $marca,
                 $descricao,
@@ -114,11 +110,10 @@ class ProdutoController
             // CADASTRAR NOVO PRODUTO
             // =========================
 
-            // Insere produto + SKU + estoque + preço
+            // Insere produto + estoque + preço
             // e pega o ID para nomear a imagem
             $novoId = $produtoModel->inserir(
                 $categoriaId,
-                $sku,
                 $nome,
                 $marca,
                 $descricao,
