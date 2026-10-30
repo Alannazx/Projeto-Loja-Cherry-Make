@@ -18,7 +18,6 @@ class Produto
         SELECT
             p.id,
             p.categoria_id,
-            p.sku,
             p.nome,
             p.marca,
             p.descricao,
@@ -60,7 +59,6 @@ class Produto
 
     public function inserir(
         int $categoriaId,
-        string $sku,
         string $nome,
         string $marca,
         ?string $descricao,
@@ -72,7 +70,6 @@ class Produto
             INSERT INTO produto
             (
                 categoria_id,
-                sku,
                 nome,
                 marca,
                 descricao,
@@ -83,7 +80,6 @@ class Produto
             VALUES
             (
                 :categoria_id,
-                :sku,
                 :nome,
                 :marca,
                 :descricao,
@@ -95,7 +91,6 @@ class Produto
 
         $stmt->execute([
             ':categoria_id' => $categoriaId,
-            ':sku' => trim($sku),
             ':nome' => $nome,
             ':marca' => $marca,
             ':descricao' => $descricao,
@@ -110,7 +105,6 @@ class Produto
     public function atualizar(
         int $id,
         int $categoriaId,
-        string $sku,
         string $nome,
         string $marca,
         ?string $descricao,
@@ -122,7 +116,6 @@ class Produto
             UPDATE produto
             SET
                 categoria_id = :categoria_id,
-                sku = :sku,
                 nome = :nome,
                 marca = :marca,
                 descricao = :descricao,
@@ -134,7 +127,6 @@ class Produto
         $stmt->execute([
             ':id' => $id,
             ':categoria_id' => $categoriaId,
-            ':sku' => trim($sku),
             ':nome' => $nome,
             ':marca' => $marca,
             ':descricao' => $descricao,
