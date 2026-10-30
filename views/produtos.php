@@ -964,35 +964,6 @@ textarea.input{
 
 
 
-            <!-- SKU -->
-
-            <div class="form-group">
-
-                <label>
-                    SKU
-                </label>
-
-
-                <input
-                    class="input"
-                    type="text"
-                    name="sku"
-                    maxlength="100"
-                    value="<?= $editar
-                        ? htmlspecialchars($editar['sku'] ?? '')
-                        : ''
-                    ?>"
-                    placeholder="Ex: CM-001"
-                >
-
-
-                <small class="muted">
-                    Código único de identificação do produto.
-                </small>
-
-            </div>
-
-
 
             <!-- NOME -->
 
